@@ -8,7 +8,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-export const Button = ({
+const Button = ({
   primary = false,
   size = 'medium',
   children,
@@ -27,3 +27,4 @@ export const Button = ({
 };
 
 // 테스트
+export default Button;

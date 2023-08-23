@@ -1,15 +1,15 @@
 @storybook/cli v7.3.1
 
-info => Cleaning outputDir: C:\Users\lkj\AppData\Local\Temp\chromatic--27808-63HMW0JZBsw2
+info => Cleaning outputDir: C:\Users\lkj\AppData\Local\Temp\chromatic--30800-5tbV1iglfJRN
 info => Loading presets
 WARN Could not resolve addon "@storybook/addon-actions", skipping. Is it installed?
 info Found existing addon "@storybook/addon-actions", skipping.
 WARN Could not resolve addon "@storybook/addon-actions", skipping. Is it installed?
 info Found existing addon "@storybook/addon-actions", skipping.
 info => Building manager..
-info => Manager built (1.36 s)
+info => Manager built (3.3 s)
 info => Compiling preview..
-info => Copying static files: D:\code\storybook-ts\node_modules\@storybook\manager\static at C:\Users\lkj\AppData\Local\Temp\chromatic--27808-63HMW0JZBsw2\sb-common-assets
+info => Copying static files: D:\code\storybook-ts\node_modules\@storybook\manager\static at C:\Users\lkj\AppData\Local\Temp\chromatic--30800-5tbV1iglfJRN\sb-common-assets
 info Addon-docs: using MDX2
 info => Loading Webpack configuration from `node_modules\react-scripts`
 info => Removing existing JavaScript and TypeScript rules.
@@ -126,30 +126,44 @@ info => Using default Webpack5 setup
 <s> [webpack.Progress] 10% building 0/1 entries 1/1 dependencies 0/0 modules
 <s> [webpack.Progress] 17% building import loader ./node_modules/react-scripts/node_modules/babel-loader/lib/index.js
 <s> [webpack.Progress] 17% building import loader ./node_modules/source-map-loader/dist/cjs.js
-<s> [webpack.Progress] 17% building 0/1 entries 15/22 dependencies 2/15 modules
-<s> [webpack.Progress] 26% building 0/1 entries 32/58 dependencies 7/24 modules
+<s> [webpack.Progress] 17% building 0/1 entries 15/20 dependencies 2/15 modules
+<s> [webpack.Progress] 20% building 0/1 entries 22/37 dependencies 4/21 modules
 <s> [webpack.Progress] 25% building import loader ./node_modules/@storybook/mdx2-csf/loader.js
 <s> [webpack.Progress] 25% building 0/1 entries 32/58 dependencies 7/25 modules
-<s> [webpack.Progress] 22% building import loader ./node_modules/unplugin/dist/webpack/loaders/load.js
-<s> [webpack.Progress] 22% building 0/1 entries 45/79 dependencies 8/35 modules
-info => Copying static files: D:\code\storybook-ts\public at C:\Users\lkj\AppData\Local\Temp\chromatic--27808-63HMW0JZBsw2\
-<s> [webpack.Progress] 28% building import loader ./node_modules/@svgr/webpack/lib/index.js
-<s> [webpack.Progress] 28% building import loader ./node_modules/file-loader/dist/cjs.js
-<s> [webpack.Progress] 28% building 0/1 entries 95/110 dependencies 22/67 modules
-<s> [webpack.Progress] 34% building 0/1 entries 134/150 dependencies 39/86 modules
-<s> [webpack.Progress] 40% building 0/1 entries 200/231 dependencies 61/110 modules
-<s> [webpack.Progress] 42% building import loader ./node_modules/mini-css-extract-plugin/dist/loader.js
-<s> [webpack.Progress] 42% building import loader ./node_modules/css-loader/dist/cjs.js
-<s> [webpack.Progress] 42% building import loader ./node_modules/postcss-loader/dist/cjs.js
-<s> [webpack.Progress] 42% building 0/1 entries 205/233 dependencies 68/115 modules
-<s> [webpack.Progress] 38% building 0/1 entries 228/300 dependencies 68/132 modules
-<s> [webpack.Progress] 30% building 0/1 entries 343/400 dependencies 79/209 modules
-<s> [webpack.Progress] 33% building 0/1 entries 475/579 dependencies 100/230 modules
-<s> [webpack.Progress] 37% building 0/1 entries 620/700 dependencies 149/293 modules
-<s> [webpack.Progress] 43% building 0/1 entries 697/730 dependencies 185/300 modules
-<s> [webpack.Progress] 55% building 0/1 entries 871/915 dependencies 300/360 modules
-<s> [webpack.Progress] 56% building 0/1 entries 964/974 dependencies 336/400 modules
-<s> [webpack.Progress] 58% building 0/1 entries 1158/1161 dependencies 400/452 modules
+<s> [webpack.Progress] 26% building import loader ./node_modules/unplugin/dist/webpack/loaders/load.js
+<s> [webpack.Progress] 26% building 0/1 entries 37/79 dependencies 8/27 modules
+<s> [webpack.Progress] 29% building 0/1 entries 69/102 dependencies 17/49 modules
+<s> [webpack.Progress] 25% building import loader ./node_modules/@svgr/webpack/lib/index.js
+<s> [webpack.Progress] 25% building import loader ./node_modules/file-loader/dist/cjs.js
+<s> [webpack.Progress] 25% building 0/1 entries 87/106 dependencies 18/62 modules
+info => Copying static files: D:\code\storybook-ts\public at C:\Users\lkj\AppData\Local\Temp\chromatic--30800-5tbV1iglfJRN\
+<s> [webpack.Progress] 27% building 0/1 entries 106/118 dependencies 24/76 modules
+<s> [webpack.Progress] 36% building 0/1 entries 123/143 dependencies 38/80 modules
+<s> [webpack.Progress] 38% building 0/1 entries 148/181 dependencies 47/92 modules
+<s> [webpack.Progress] 39% building 0/1 entries 171/199 dependencies 54/100 modules
+[0;33mOne of your dependencies, babel-preset-react-app, is importing the
+"@babel/plugin-proposal-private-property-in-object" package without
+declaring it in its dependencies. This is currently working because
+"@babel/plugin-proposal-private-property-in-object" is already in your
+node_modules folder for unrelated reasons, but it [1mmay break at any time[0;33m.
+
+babel-preset-react-app is part of the create-react-app project, [1mwhich
+is not maintianed anymore[0;33m. It is thus unlikely that this bug will
+ever be fixed. Add "@babel/plugin-proposal-private-property-in-object" to
+your devDependencies to work around this error. This will make this message
+go away.[0m
+  
+<s> [webpack.Progress] 39% building 0/1 entries 200/236 dependencies 60/112 modules
+<s> [webpack.Progress] 34% building import loader ./node_modules/mini-css-extract-plugin/dist/loader.js
+<s> [webpack.Progress] 34% building import loader ./node_modules/css-loader/dist/cjs.js
+<s> [webpack.Progress] 34% building import loader ./node_modules/postcss-loader/dist/cjs.js
+<s> [webpack.Progress] 34% building 0/1 entries 238/281 dependencies 61/136 modules
+<s> [webpack.Progress] 35% building 0/1 entries 321/400 dependencies 82/178 modules
+<s> [webpack.Progress] 28% building 0/1 entries 480/500 dependencies 94/275 modules
+<s> [webpack.Progress] 40% building 0/1 entries 666/693 dependencies 167/300 modules
+<s> [webpack.Progress] 55% building 0/1 entries 862/900 dependencies 298/357 modules
+<s> [webpack.Progress] 58% building 0/1 entries 968/976 dependencies 355/400 modules
+<s> [webpack.Progress] 58% building 0/1 entries 1153/1163 dependencies 400/449 modules
 <s> [webpack.Progress] 65% building 1/1 entries 1221/1221 dependencies 480/480 modules
 <s> [webpack.Progress] 65% building
 <s> [webpack.Progress] 69% building finish
@@ -256,18 +270,18 @@ info => Copying static files: D:\code\storybook-ts\public at C:\Users\lkj\AppDat
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin main.c7e6309f.iframe.bundle.js generate SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin main.c7e6309f.iframe.bundle.js generated SourceMap
-<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin runtime~main.293c0a69.iframe.bundle.js generate SourceMap
-<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin runtime~main.293c0a69.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin runtime~main.ee4eac25.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin runtime~main.ee4eac25.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-Configure-mdx.5f090eb3.iframe.bundle.js generate SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-Configure-mdx.5f090eb3.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin static/css/stories-button-Button-stories.636b016b.chunk.css generate SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin static/css/stories-button-Button-stories.636b016b.chunk.css generated SourceMap
-<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-button-Button-stories.f305781a.iframe.bundle.js generate SourceMap
-<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-button-Button-stories.f305781a.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-button-Button-stories.7d62ebc5.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-button-Button-stories.7d62ebc5.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin static/css/stories-header-Header-stories.2a543dae.chunk.css generate SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin static/css/stories-header-Header-stories.2a543dae.chunk.css generated SourceMap
-<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-header-Header-stories.7fc01002.iframe.bundle.js generate SourceMap
-<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-header-Header-stories.7fc01002.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-header-Header-stories.99a6cc2e.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin stories-header-Header-stories.99a6cc2e.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 328.c2f6a037.iframe.bundle.js generate SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 328.c2f6a037.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 729.75f56bb5.iframe.bundle.js generate SourceMap
@@ -333,8 +347,8 @@ info => Copying static files: D:\code\storybook-ts\public at C:\Users\lkj\AppDat
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin main.ca8bfe51.iframe.bundle.js generate SourceMap
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin main.ca8bfe51.iframe.bundle.js generated SourceMap
-<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin runtime~main.273735a3.iframe.bundle.js generate SourceMap
-<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin runtime~main.273735a3.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin runtime~main.68e659c3.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin runtime~main.68e659c3.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin 328.c64b069b.iframe.bundle.js generate SourceMap
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin 328.c64b069b.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin 729.0a1835ba.iframe.bundle.js generate SourceMap
@@ -373,10 +387,10 @@ info => Copying static files: D:\code\storybook-ts\public at C:\Users\lkj\AppDat
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin 433.dc3fded7.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-Configure-mdx.db9226ff.iframe.bundle.js generate SourceMap
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-Configure-mdx.db9226ff.iframe.bundle.js generated SourceMap
-<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-button-Button-stories.f2f1df82.iframe.bundle.js generate SourceMap
-<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-button-Button-stories.f2f1df82.iframe.bundle.js generated SourceMap
-<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-header-Header-stories.27c8fd8d.iframe.bundle.js generate SourceMap
-<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-header-Header-stories.27c8fd8d.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-button-Button-stories.7207875c.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-button-Button-stories.7207875c.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-header-Header-stories.d9418166.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin stories-header-Header-stories.d9418166.iframe.bundle.js generated SourceMap
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin resolve sources
 <s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin
 <s> [webpack.Progress] 92% sealing asset processing
@@ -386,40 +400,131 @@ info => Copying static files: D:\code\storybook-ts\public at C:\Users\lkj\AppDat
 <s> [webpack.Progress] 93% sealing recording
 <s> [webpack.Progress] 94% sealing after seal
 <s> [webpack.Progress] 94% sealing after seal
-<s> [webpack.Progress] 95% emitting emit
-<s> [webpack.Progress] 95% emitting emit
-<s> [webpack.Progress] 98% emitting after emit
-<s> [webpack.Progress] 98% emitting after emit SizeLimitsPlugin
-<s> [webpack.Progress] 98% emitting after emit
 <s> [webpack.Progress] 99% done plugins
 <s> [webpack.Progress] 99% done plugins CaseSensitivePathsPlugin
 <s> [webpack.Progress] 99% done plugins ForkTsCheckerWebpackPlugin
 <s> [webpack.Progress] 99% done plugins
 <s> [webpack.Progress] 99% 
 
-<s> [webpack.Progress] 99% cache store build dependencies
-<s> [webpack.Progress] 99% cache store build dependencies
 <s> [webpack.Progress] 99% cache begin idle
 <s> [webpack.Progress] 99% cache begin idle
 <s> [webpack.Progress] 100% 
 
-info => Preview built (1.7 min)
-WARN asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
-WARN This can impact web performance.
-WARN Assets: 
-WARN   7a58d2cb9a6358f85e9b.png (456 KiB)
-WARN   77.9099ae9b.iframe.bundle.js (583 KiB)
-WARN   167.4360eb82.iframe.bundle.js (906 KiB)
-WARN   611.4061d7f4.iframe.bundle.js (722 KiB)
-WARN entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
-WARN Entrypoints:
-WARN   main (737 KiB)
-WARN       runtime~main.273735a3.iframe.bundle.js
-WARN       611.4061d7f4.iframe.bundle.js
-WARN       main.ca8bfe51.iframe.bundle.js
-WARN 
+ERR! => Failed to build the preview
+ERR! TS2322: Type '{ backgroundColor: { control: string; }; }' is not assignable to type 'Partial<ArgTypes<ButtonProps>>'.
+ERR!   Object literal may only specify known properties, and 'backgroundColor' does not exist in type 'Partial<ArgTypes<ButtonProps>>'.
+ERR!     15 |   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+ERR!     16 |   argTypes: {
+ERR!   > 17 |     backgroundColor: { control: "color" },
+ERR!        |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ERR!     18 |   },
+ERR!     19 | } satisfies Meta<typeof Button>;
+ERR!     20 |
+ERR! TS2322: Type '{ primary: true; label: string; }' is not assignable to type 'Partial<{ primary?: boolean | undefined; size?: "small" | "medium" | "large" | undefined; children: any; onClick?: (() => void) | undefined; }> & { primary?: boolean | undefined; size?: "small" | ... 2 more ... | undefined; onClick?: (() => void) | undefined; children?: any; }'.
+ERR!   Object literal may only specify known properties, and 'label' does not exist in type 'Partial<{ primary?: boolean | undefined; size?: "small" | "medium" | "large" | undefined; children: any; onClick?: (() => void) | undefined; }> & { primary?: boolean | undefined; size?: "small" | ... 2 more ... | undefined; onClick?: (() => void) | undefined; children?: any; }'.
+ERR!     26 |   args: {
+ERR!     27 |     primary: true,
+ERR!   > 28 |     label: "Button",
+ERR!        |     ^^^^^^^^^^^^^^^
+ERR!     29 |   },
+ERR!     30 | };
+ERR!     31 |
+ERR! TS2322: Type '{ label: string; }' is not assignable to type 'Partial<{ primary?: boolean | undefined; size?: "small" | "medium" | "large" | undefined; children: any; onClick?: (() => void) | undefined; }> & { primary?: boolean | undefined; size?: "small" | ... 2 more ... | undefined; onClick?: (() => void) | undefined; children?: any; }'.
+ERR!   Object literal may only specify known properties, and 'label' does not exist in type 'Partial<{ primary?: boolean | undefined; size?: "small" | "medium" | "large" | undefined; children: any; onClick?: (() => void) | undefined; }> & { primary?: boolean | undefined; size?: "small" | ... 2 more ... | undefined; onClick?: (() => void) | undefined; children?: any; }'.
+ERR!     32 | export const Secondary: Story = {
+ERR!     33 |   args: {
+ERR!   > 34 |     label: "Button",
+ERR!        |     ^^^^^^^^^^^^^^^
+ERR!     35 |   },
+ERR!     36 | };
+ERR!     37 |
+ERR! TS2322: Type '{ size: "large"; label: string; }' is not assignable to type 'Partial<{ primary?: boolean | undefined; size?: "small" | "medium" | "large" | undefined; children: any; onClick?: (() => void) | undefined; }> & { primary?: boolean | undefined; size?: "small" | ... 2 more ... | undefined; onClick?: (() => void) | undefined; children?: any; }'.
+ERR!   Object literal may only specify known properties, and 'label' does not exist in type 'Partial<{ primary?: boolean | undefined; size?: "small" | "medium" | "large" | undefined; children: any; onClick?: (() => void) | undefined; }> & { primary?: boolean | undefined; size?: "small" | ... 2 more ... | undefined; onClick?: (() => void) | undefined; children?: any; }'.
+ERR!     39 |   args: {
+ERR!     40 |     size: "large",
+ERR!   > 41 |     label: "Button",
+ERR!        |     ^^^^^^^^^^^^^^^
+ERR!     42 |   },
+ERR!     43 | };
+ERR!     44 |
+ERR! TS2322: Type '{ size: "small"; label: string; }' is not assignable to type 'Partial<{ primary?: boolean | undefined; size?: "small" | "medium" | "large" | undefined; children: any; onClick?: (() => void) | undefined; }> & { primary?: boolean | undefined; size?: "small" | ... 2 more ... | undefined; onClick?: (() => void) | undefined; children?: any; }'.
+ERR!   Object literal may only specify known properties, and 'label' does not exist in type 'Partial<{ primary?: boolean | undefined; size?: "small" | "medium" | "large" | undefined; children: any; onClick?: (() => void) | undefined; }> & { primary?: boolean | undefined; size?: "small" | ... 2 more ... | undefined; onClick?: (() => void) | undefined; children?: any; }'.
+ERR!     46 |   args: {
+ERR!     47 |     size: "small",
+ERR!   > 48 |     label: "Button",
+ERR!        |     ^^^^^^^^^^^^^^^
+ERR!     49 |   },
+ERR!     50 | };
+ERR!     51 |
+ERR! TS2322: Type '{ size: "small"; onClick: () => void; label: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.
+ERR!   Property 'label' does not exist on type 'IntrinsicAttributes & ButtonProps'.
+ERR!     44 |               Welcome, <b>{user.name}</b>!
+ERR!     45 |             </span>
+ERR!   > 46 |             <Button size="small" onClick={onLogout} label="Log out" />
+ERR!        |                                                     ^^^^^
+ERR!     47 |           </>
+ERR!     48 |         ) : (
+ERR!     49 |           <>
+ERR! TS2322: Type '{ size: "small"; onClick: () => void; label: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.
+ERR!   Property 'label' does not exist on type 'IntrinsicAttributes & ButtonProps'.
+ERR!     48 |         ) : (
+ERR!     49 |           <>
+ERR!   > 50 |             <Button size="small" onClick={onLogin} label="Log in" />
+ERR!        |                                                    ^^^^^
+ERR!     51 |             <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
+ERR!     52 |           </>
+ERR!     53 |         )}
+ERR! TS2322: Type '{ primary: true; size: "small"; onClick: () => void; label: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.
+ERR!   Property 'label' does not exist on type 'IntrinsicAttributes & ButtonProps'.
+ERR!     49 |           <>
+ERR!     50 |             <Button size="small" onClick={onLogin} label="Log in" />
+ERR!   > 51 |             <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
+ERR!        |                                                                    ^^^^^
+ERR!     52 |           </>
+ERR!     53 |         )}
+ERR!     54 |       </div>
 <s> [webpack.Progress] 99% cache shutdown
 <s> [webpack.Progress] 99% cache shutdown
 <s> [webpack.Progress] 100% 
 
-info => Output directory: C:\Users\lkj\AppData\Local\Temp\chromatic--27808-63HMW0JZBsw2
+ERR! Error: => Webpack failed, learn more with --debug-webpack
+ERR!     at D:\code\storybook-ts\node_modules\@storybook\builder-webpack5\dist\index.js:1:7628
+ERR!     at D:\code\storybook-ts\node_modules\webpack\lib\HookWebpackError.js:68:3
+ERR!     at Hook.eval [as callAsync] (eval at create (D:\code\storybook-ts\node_modules\tapable\lib\HookCodeFactory.js:33:10), <anonymous>:11:1)
+ERR!     at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\code\storybook-ts\node_modules\tapable\lib\Hook.js:18:14)
+ERR!     at Cache.shutdown (D:\code\storybook-ts\node_modules\webpack\lib\Cache.js:150:23)
+ERR!     at D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:1229:15
+ERR!     at Hook.eval [as callAsync] (eval at create (D:\code\storybook-ts\node_modules\tapable\lib\HookCodeFactory.js:33:10), <anonymous>:6:1)
+ERR!     at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\code\storybook-ts\node_modules\tapable\lib\Hook.js:18:14)
+ERR!     at Compiler.close (D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:1222:23)
+ERR!     at D:\code\storybook-ts\node_modules\@storybook\builder-webpack5\dist\index.js:1:7580
+ERR!     at finalCallback (D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:441:32)
+ERR!     at D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:458:13
+ERR!     at Hook.eval [as callAsync] (eval at create (D:\code\storybook-ts\node_modules\tapable\lib\HookCodeFactory.js:33:10), <anonymous>:35:1)
+ERR!     at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\code\storybook-ts\node_modules\tapable\lib\Hook.js:18:14)
+ERR!     at onCompiled (D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:456:21)
+ERR!     at D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:1200:17
+ERR!     at eval (eval at create (D:\code\storybook-ts\node_modules\tapable\lib\HookCodeFactory.js:33:10), <anonymous>:14:1)
+ERR!     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ERR!  Error: => Webpack failed, learn more with --debug-webpack
+ERR!     at D:\code\storybook-ts\node_modules\@storybook\builder-webpack5\dist\index.js:1:7628
+ERR!     at D:\code\storybook-ts\node_modules\webpack\lib\HookWebpackError.js:68:3
+ERR!     at Hook.eval [as callAsync] (eval at create (D:\code\storybook-ts\node_modules\tapable\lib\HookCodeFactory.js:33:10), <anonymous>:11:1)
+ERR!     at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\code\storybook-ts\node_modules\tapable\lib\Hook.js:18:14)
+ERR!     at Cache.shutdown (D:\code\storybook-ts\node_modules\webpack\lib\Cache.js:150:23)
+ERR!     at D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:1229:15
+ERR!     at Hook.eval [as callAsync] (eval at create (D:\code\storybook-ts\node_modules\tapable\lib\HookCodeFactory.js:33:10), <anonymous>:6:1)
+ERR!     at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\code\storybook-ts\node_modules\tapable\lib\Hook.js:18:14)
+ERR!     at Compiler.close (D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:1222:23)
+ERR!     at D:\code\storybook-ts\node_modules\@storybook\builder-webpack5\dist\index.js:1:7580
+ERR!     at finalCallback (D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:441:32)
+ERR!     at D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:458:13
+ERR!     at Hook.eval [as callAsync] (eval at create (D:\code\storybook-ts\node_modules\tapable\lib\HookCodeFactory.js:33:10), <anonymous>:35:1)
+ERR!     at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\code\storybook-ts\node_modules\tapable\lib\Hook.js:18:14)
+ERR!     at onCompiled (D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:456:21)
+ERR!     at D:\code\storybook-ts\node_modules\webpack\lib\Compiler.js:1200:17
+ERR!     at eval (eval at create (D:\code\storybook-ts\node_modules\tapable\lib\HookCodeFactory.js:33:10), <anonymous>:14:1)
+ERR!     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+WARN Could not resolve addon "@storybook/addon-actions", skipping. Is it installed?
+info Found existing addon "@storybook/addon-actions", skipping.
+[?25l[2K[1G[36m?[39m [1mWould you like to help improve Storybook by sending anonymous crash reports?[22m [90m»[39m [90m(Y/n)[39m

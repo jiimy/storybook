@@ -1,2 +1,2 @@
-export { Button } from './stories/button/Button';
-export { Header } from "./stories/header/Header";
+export { default as Button } from './stories/button/Button';
+export { default as Header } from "./stories/header/Header";
