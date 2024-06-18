@@ -72,7 +72,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.35.0",
-    "storybook": "^7.3.1",
+    "storybook": "^7.6.19",
     "webpack": "^5.88.2"
   },
   "readme": "ERROR: No README data found!",
