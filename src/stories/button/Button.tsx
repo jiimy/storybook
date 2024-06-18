@@ -1,28 +1,40 @@
 import React from 'react';
-import './button.css';
+import s from './button.module.scss';
+import styled, { css } from 'styled-components';
 
-interface ButtonProps {
-  primary?: boolean;
+type ButtonProps = {
+  theme?: 'primary' | 'secondary';
   size?: 'small' | 'medium' | 'large';
   children: any;
   onClick?: () => void;
 }
 
+const ButtonStyle = styled.button<ButtonProps>`
+  ${props => props.theme === 'primary' && css`
+    background: blue;
+  `}
+  ${props => props.size === 'small' && css`
+      font-size: 12px;
+      padding: 10px 16px;
+  `}
+`
+
 const Button = ({
-  primary = false,
+  theme = 'primary',
   size = 'medium',
   children,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
-    <button
+    <ButtonStyle
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      className={s.button}
       {...props}
+      // theme={theme}
+      // size={size}
     >
       {children}
-    </button>
+    </ButtonStyle>
   );
 };
 
