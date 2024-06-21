@@ -6,7 +6,7 @@ npm에 배포하기 위하여 만들어진 스토리북 샘플 레포지토리 �
 
 ## 스토리북 로컬 실행
 
-npm run storybook
+- npm run storybook
 
 ## 새로운 컴포넌트 추가 시
 
@@ -21,15 +21,15 @@ npm run storybook
 ## npm 배포
 
 version 수정 후
-npm publish
+- npm publish
 
-## url 배포
+## chromatic 배포
 
-https://www.chromatic.com/builds?appId=64e5aa9d2c6b31e96ff80703
+- npm run chromatic
+
+https://www.chromatic.com/build?appId=64e5aa9d2c6b31e96ff80703&number=5
 
 https://www.chromatic.com/
-
-https://www.chromatic.com/library?appId=64e5aa9d2c6b31e96ff80703
 
 
 ## 실제 사용
@@ -38,17 +38,39 @@ ex)
 import { Button } from "cherry-cock-ui";
 
 ## ui
+모든 ui는 따로 수정이 가능하게.
+
+- 아토믹 개념으로 해야할지? 
+
+### 컴포넌트 단위
+어디까지 사용자의 제약을 줄지 에 대해 고민하기 
+- 단순 컴포넌트 단위까지 할것인지. 
+- 형식이 정해져있는 molecus 단위까지 할것인지
+
+
 - button []
-  - 테마, 사이즈, full 사이즈 여부
+  - 테마, 사이즈, width-full 여부
+- input []
+  - width-full 여부
 - sheet []
   - 열고/닫고, 트랜지션, 내부에 모션이 없는 다른 컴포넌트 가능.
 - toast []
   - 방향, 위치, 속도
+- modal []
+  - dim 유무, dim 클릭 유무, 이벤트-닫기, 사이즈
 - snackbar []
   - 보여지는 속도, 사라지는 속도, 닫기 여부, 스택형
 - motionlayer []
-  - 여러 모션들 
+  - 여러 모션들. framer-motion 처럼 모션 자체를 정의하는 감싸는 용도의 레이어
 - timer progress []
   - 칸 갯수, 총 시간, 시작타이밍 
 - counter ui []
   - 버튼 위치
+- tag []
+  - 사이즈
+- tooltip []
+  - 열리는 방향 
+
+### ???
+- 사이드바
+- 
