@@ -11,27 +11,27 @@ type ButtonProps = {
 
 const ButtonStyle = styled.button<ButtonProps>`
   ${props => props.theme === 'primary' && css`
-    background: blue;
+    background: var(--primary-color);
   `}
   ${props => props.size === 'small' && css`
-      font-size: 12px;
-      padding: 10px 16px;
+    font-size: 12px;
+    padding: 10px 16px;
   `}
 `
 
 const Button = ({
   theme = 'primary',
   size = 'medium',
-  children,
-  ...props
+  onClick,
+  children
 }: ButtonProps) => {
   return (
     <ButtonStyle
       type="button"
       className={s.button}
-      {...props}
-      // theme={theme}
-      // size={size}
+      theme={theme}
+      size={size}
+      onClick={onClick}
     >
       {children}
     </ButtonStyle>

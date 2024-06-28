@@ -12,7 +12,8 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
     "@storybook/addon-controls",
     "@storybook/addon-mdx-gfm",
-    "@chromatic-com/storybook"
+    "@chromatic-com/storybook",
+    "@storybook/addon-styling-webpack",
   ],
 
   framework: {

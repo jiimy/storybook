@@ -48,7 +48,6 @@ import { Button } from "cherry-cock-ui";
 
 - button []
   - 테마, 사이즈, width-full 여부
-
 - modal []
   - dim 유무, dim 클릭 유무, 이벤트-닫기, 사이즈
 - toast []

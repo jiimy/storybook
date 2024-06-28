@@ -1,16 +1,36 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
+import styled, { css } from 'styled-components';
+import s from './sheet.module.scss';
 
 type SheetProps = {
-  open?: boolean;
-  childern?: ReactNode;
+  // isToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  isShow: boolean;
+  onClose: () => void;
+  children?: ReactNode;
+  dim?: boolean;
+  height?: string;
 }
 
-const Sheet = ({open, childern }: SheetProps) => {
+// const SheetWrapStyle = styled.div<{ isShow: boolean }>` `
+
+// TODO: 코드 개선 필요
+const SheetStyle = styled.div<{isShow: boolean, height: string}>`
+  top: ${(props) => (props.isShow ? `calc(100% - ${props.height})` : `100%`)};
+`
+
+const Sheet = ({ children, dim = false, isShow = false, height = '50%', onClose }: SheetProps) => {
+
   return (
-    <div>
-      시트
-      {childern}
-    </div>
+    <>
+      {
+        <SheetStyle className={s.sheet} height={height} isShow={isShow}>
+          <div className={s.sheet_header} onClick={() => onClose()}>
+            <span></span>
+          </div>
+          {children}
+        </SheetStyle>
+      }
+    </>
   );
 };
 
