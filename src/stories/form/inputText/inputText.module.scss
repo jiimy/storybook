@@ -1,0 +1,7 @@
+.input_wrap {
+  display: flex;
+  flex-direction: column;
+  input + span {
+    font-weight: bold;
+  }
+}
