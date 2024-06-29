@@ -1,25 +1,29 @@
 import styled, { css } from 'styled-components';
 import React, { HTMLProps, forwardRef, Ref } from "react";
+import s from './inputText.module.scss';
 
-type InputProps = {
+type InputTextProps = {
   state?: 'error' | 'warning' | 'success',
   value?: string;
   onChange?: (value: string) => void;
+  validText?: string;
 } & HTMLProps<HTMLInputElement>
 
-const InputDivStyle = styled.div<InputProps>`
+const InputDivStyle = styled.div<InputTextProps>`
   ${props => props.state === 'error' && css`
-    input {
-      border-color: red;
+    span {
+      color: var(--error);
     }
   `}
   ${props => props.state === 'warning' && css`
-    font-size: 12px;
-    padding: 10px 16px;
+    span {
+      color: var(--warning);
+    }
   `}
   ${props => props.state === 'success' && css`
-    font-size: 12px;
-    padding: 10px 16px;
+    span {
+      color: var(--success);
+    }
   `}
 `
 
@@ -27,17 +31,18 @@ const InputStyle = styled.input`
 
 `
 
-const Input = ({state, value, onChange, ...attr}: InputProps) => {
+const InputText = ({ state, value, onChange, validText, ...attr }: InputTextProps) => {
 
   const handleChange = (event: any) => {
     // onChange(event.target.value);
   };
 
   return (
-    <InputDivStyle state={state}>
+    <InputDivStyle state={state} className={s.input_wrap}>
       <InputStyle type="text" value={value} onChange={handleChange} {...attr} />
+      {validText && <span>{validText}</span>}
     </InputDivStyle>
   );
 };
 
-export default Input;
+export default InputText;
