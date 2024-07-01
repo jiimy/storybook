@@ -22,7 +22,8 @@ type Story = StoryObj<typeof Sheet>;
 
 export const Toggle: Story = {
   args: {
-    isShow: false
+    isShow: false,
+    isDim: false,
   },
   render: function Render(args) {
     const [isShow, setIsShow] = useState(false);
@@ -30,14 +31,11 @@ export const Toggle: Story = {
     const openSheet = () => setIsShow(true);
     const closeSheet = () => setIsShow(false);
 
-    console.log('isopen', isShow);
-
     return (
       <>
         <button onClick={openSheet}>Open Sheet</button>
-        {/* <button onClick={() => setIsOpen(false)}>close Sheet</button> */}
         <div>
-          <Sheet {...args} isShow={isShow} onClose={closeSheet}/>
+          <Sheet {...args} isShow={isShow} onClose={closeSheet} />
         </div>
       </>
     );

@@ -7,21 +7,22 @@ type SheetProps = {
   isShow: boolean;
   onClose: () => void;
   children?: ReactNode;
-  dim?: boolean;
+  isDim?: boolean;
   height?: string;
 }
 
 // const SheetWrapStyle = styled.div<{ isShow: boolean }>` `
 
 // TODO: 코드 개선 필요
-const SheetStyle = styled.div<{isShow: boolean, height: string}>`
+const SheetStyle = styled.div<{ isShow: boolean, height: string }>`
   top: ${(props) => (props.isShow ? `calc(100% - ${props.height})` : `100%`)};
 `
 
-const Sheet = ({ children, dim = false, isShow = false, height = '50%', onClose }: SheetProps) => {
+const Sheet = ({ children, isDim = false, isShow = false, height = '50%', onClose }: SheetProps) => {
 
   return (
     <>
+      {isDim && isShow && <div className={s.dim} />}
       {
         <SheetStyle className={s.sheet} height={height} isShow={isShow}>
           <div className={s.sheet_header} onClick={() => onClose()}>
