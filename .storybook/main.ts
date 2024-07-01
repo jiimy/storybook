@@ -27,6 +27,11 @@ const config: StorybookConfig = {
 
   typescript: {
     reactDocgen: "react-docgen-typescript"
-  }
+  },
+
+  previewHead: (head) => `
+    ${head}
+    <div id="modal"></div>
+  `,
 };
 export default config;
