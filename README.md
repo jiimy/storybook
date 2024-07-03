@@ -66,6 +66,8 @@ import { Button } from "cherry-cock-ui";
   - 열리는 방향
 - form/input []
   width-full 여부
+- dropdown []
+  - 열기/닫기, outsideclick, children
 
 ### 컴포넌트보다 큰 애들 (추후)
 

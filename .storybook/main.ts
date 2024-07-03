@@ -14,6 +14,7 @@ const config: StorybookConfig = {
     "@storybook/addon-mdx-gfm",
     "@chromatic-com/storybook",
     "@storybook/addon-styling-webpack",
+    "@storybook/addon-storysource",
   ],
 
   framework: {
