@@ -5,7 +5,7 @@ type TagIconProps = {
 };
 
 export const TagIcon = forwardRef<HTMLSpanElement, TagIconProps>(
-	function TagIcon({ children }, ref) {
+	({ children }, ref) => {
 		return <span ref={ref}>{children}</span>;
 	},
 );
