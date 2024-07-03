@@ -31,7 +31,7 @@ https://www.chromatic.com/
 ## 실제 사용
 
 ex)
-import { Button } from "cherry-cock-ui";
+import { Button } from "snow-white-ui";
 
 ## ui
 
