@@ -1,19 +1,30 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import Tag from '.';
 
 const meta: Meta = {
 	title: 'Component/Tag',
 	tags: ['autodocs'],
-	argTypes: {},
+	argTypes: {
+		rounded: { control: 'boolean' },
+		closable: { control: 'boolean' },
+		size: {
+			control: { type: 'select' },
+			options: ['sm', 'lg'],
+		},
+	},
 	decorators: [(story: Function) => <>{story()}</>],
 };
 
 export default meta;
 
-export const Overflow = () => {
-	return (
-		<Tag size='sm' color='blue'>
-			Tag
-		</Tag>
-	);
+export const Default: StoryObj<typeof Tag> = {
+	args: {
+		rounded: false,
+		closable: false,
+		children: 'Tag',
+		size: 'sm',
+	},
+	render: function Render(args) {
+		return <Tag {...args}>{args.children}</Tag>;
+	},
 };
