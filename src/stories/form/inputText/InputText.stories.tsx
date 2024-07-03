@@ -23,6 +23,10 @@ type Story = StoryObj<typeof InputText>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Basic: Story = {
   args: {
-    
   },
+  render: function Render(args) {
+    return (
+      <InputText placeholder="placehoder test"/>
+    )
+  }
 }
