@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import { Tag } from './index';
+import Tag from '.';
 
 const meta: Meta = {
 	title: 'Component/Tag',
@@ -12,9 +12,8 @@ export default meta;
 
 export const Overflow = () => {
 	return (
-		<Tag.Wrapper size='sm' color='blue'>
-			<Tag.Label>Tag</Tag.Label>
-			<Tag.CloseButton onClick={() => {}} />
-		</Tag.Wrapper>
+		<Tag size='sm' color='blue'>
+			Tag
+		</Tag>
 	);
 };
