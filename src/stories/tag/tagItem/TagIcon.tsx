@@ -1,12 +1,16 @@
 import { forwardRef } from 'react';
 
-type TagIconProps = {
-	children: React.ReactNode;
+export type TagIconProps = {
+	icon: React.ReactNode;
 };
 
 export const TagIcon = forwardRef<HTMLSpanElement, TagIconProps>(
-	({ children }, ref) => {
-		return <span ref={ref}>{children}</span>;
+	(props, ref) => {
+		return (
+			<span ref={ref} {...props}>
+				{props.icon}
+			</span>
+		);
 	},
 );
 

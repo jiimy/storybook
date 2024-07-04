@@ -7,6 +7,7 @@ type TagProps = {
 	rounded?: boolean;
 	size?: 'lg' | 'sm';
 	children?: React.ReactNode;
+	onClose?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const sizeStyles = {
@@ -31,7 +32,9 @@ const StyledTag = styled.span<{
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
 	({ ...props }, ref) => {
 		const closeButton = props.closable && (
-			<button onClick={() => 'close'}>x</button>
+			<button className={s.close} onClick={props.onClose}>
+				x
+			</button>
 		);
 		return (
 			<StyledTag ref={ref} {...props} className={s.tag}>
