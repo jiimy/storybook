@@ -40,3 +40,4 @@ const Button = ({
 
 // 테스트
 export default Button;
+export type { ButtonProps }

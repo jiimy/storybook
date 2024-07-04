@@ -22,12 +22,17 @@ const config: StorybookConfig = {
     options: {},
   },
 
-  docs: {},
+  docs: {
+    autodocs: "tag",
+  },
 
   staticDirs: ["..\\public"],
 
   typescript: {
-    reactDocgen: "react-docgen-typescript"
+    reactDocgen: "react-docgen-typescript",
+    check: false,
+    checkOptions: {},
+    skipCompiler: false,
   },
 
   previewHead: (head) => `

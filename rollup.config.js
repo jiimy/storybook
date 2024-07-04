@@ -3,6 +3,8 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
+import babel from '@rollup/plugin-babel';
+import replace from '@rollup/plugin-replace';
 
 const packageJson = require("./package.json");
 
@@ -26,6 +28,15 @@ export default {
     resolve(),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true }),
-    postcss()
-  ]
+    postcss(),
+     babel({
+      exclude: 'node_modules/**',
+      babelHelpers: 'bundled',
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      preventAssignment: true,
+    }),
+  ],
+  external: ['react', 'react-dom', 'styled-components'],
 };

@@ -9,7 +9,7 @@ const meta: Meta<typeof Button> = {
   tags: ["autodocs"],
   argTypes: {
   },
-} satisfies Meta;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof Button>;

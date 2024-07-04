@@ -18,7 +18,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    // test 용 새로 추가 .d.ts 파일 생성용
+    "declaration": true,
+    "declarationDir": "./types",
   },
   "baseUrl": "src",
   "include": [

@@ -13,11 +13,30 @@ npm에 배포하기 위하여 만들어진 스토리북 샘플 레포지토리 �
    2-1.stories 파일에서 title은 경로를 의미한다.
    2-2.layout은 컴포넌트가 보여질 형식을 의미한다.
    2-3. export 로 변수타입을 내보낸다.
-3. src/index.ts 에서 추가된 컴포넌트의 위치를 export 한다.
+3. src/index.ts 파일 수정
+- 새로 추가된 컴포넌트와 props를 export한다. 
+
+```ts
+//ex
+export { default as Button } from './stories/button/Button';
+export type { ButtonProps } from './stories/button/Button';
+```
+4. src/index.d.ts 파일 수정
+- 새로 추가된 컴포넌트의 모든것을 export 한다. 
+
+```ts
+// ex
+export * from './stories/button/Button';
+```
+//TODO: index.d.ts 에서 * 로 되는걸 보면 index.ts에서도 되는지 테스트해보기
+//TODO: types 폴더 ignore 해도 npm에 적용이 되는지 테스트해보기
 
 ## npm 배포
 
 - package.json의 상단 version 수정 푸쉬 후
+┗ 푸쉬 안하고 배포 해도되지만 버전관리를 편하게 하기 위함.
+┗ 만약 푸쉬하지 않고 배포를 테스트 한다면, npm 에 가서 가장 최신버전 확인 후 배포하며 동시에 여러명이 배포 하지 않기
+- npm run build
 - npm publish
 
 ## chromatic 배포
