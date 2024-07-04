@@ -4,27 +4,23 @@ import Tag from '.';
 const meta: Meta = {
 	title: 'Component/Tag',
 	tags: ['autodocs'],
-	argTypes: {
-		rounded: { control: 'boolean' },
-		closable: { control: 'boolean' },
-		size: {
-			control: { type: 'select' },
-			options: ['sm', 'lg'],
-		},
-	},
-	decorators: [(story: Function) => <>{story()}</>],
+	component: Tag,
 };
 
 export default meta;
 
 export const Default: StoryObj<typeof Tag> = {
-	args: {
-		rounded: false,
-		closable: false,
-		children: 'Tag',
-		size: 'sm',
+	render: (args) => {
+		return <Tag {...args}>{(args.children = 'Tag')}</Tag>;
 	},
-	render: function Render(args) {
-		return <Tag {...args}>{args.children}</Tag>;
-	},
+};
+
+export const Icon: StoryObj<typeof Tag> = {
+	...Default,
+	render: (args) => (
+		<Tag {...args}>
+			<Tag.Icon icon={<>🦷</>} />
+			{(args.children = 'Tag')}
+		</Tag>
+	),
 };
