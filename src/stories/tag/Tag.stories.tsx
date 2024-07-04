@@ -1,20 +1,26 @@
-import type { Meta } from '@storybook/react';
-import { Tag } from './index';
+import type { Meta, StoryObj } from '@storybook/react';
+import Tag from '.';
 
 const meta: Meta = {
 	title: 'Component/Tag',
 	tags: ['autodocs'],
-	argTypes: {},
-	decorators: [(story: Function) => <>{story()}</>],
+	component: Tag,
 };
 
 export default meta;
 
-export const Overflow = () => {
-	return (
-		<Tag.Wrapper size='sm' color='blue'>
-			<Tag.Label>Tag</Tag.Label>
-			<Tag.CloseButton onClick={() => {}} />
-		</Tag.Wrapper>
-	);
+export const Default: StoryObj<typeof Tag> = {
+	render: (args) => {
+		return <Tag {...args}>{(args.children = 'Tag')}</Tag>;
+	},
+};
+
+export const Icon: StoryObj<typeof Tag> = {
+	...Default,
+	render: (args) => (
+		<Tag {...args}>
+			<Tag.Icon icon={<>🦷</>} />
+			{(args.children = 'Tag')}
+		</Tag>
+	),
 };
