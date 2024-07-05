@@ -1,0 +1,30 @@
+.switch {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.slider {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transition: 0.4s;
+}
+
+.input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	position: absolute;
+}
+
+.thumb {
+	position: absolute;
+	top: 50%;
+	background-color: #fff;
+	border-radius: 50%;
+	transition: 0.4s;
+	transform: translateY(-50%);
+}
