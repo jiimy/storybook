@@ -4,7 +4,7 @@ import React from "react";
 import ModalPortal from "./PortalModal";
 import s from './modal.module.scss';
 
-type modalFrameType = {
+export type modalFrameType = {
   children: React.ReactNode;
   setOnModal: React.Dispatch<React.SetStateAction<boolean>>,
   onClose?: boolean;
@@ -15,6 +15,12 @@ type modalFrameType = {
   className?: string
 }
 
+/**
+ * <div id="modal"></div> 추가 
+ * react 일 경우 : public/index.html의 #root 다음으로, 
+ * next page router일 경우 : ㅁㅁ에 (TODO: 추후 추가) , 
+ * next app router 일 경우 : app/layout.tsx의 <body></body> 안에 
+ */
 const ModalFrame = ({
   children,
   setOnModal,
@@ -27,7 +33,7 @@ const ModalFrame = ({
 }: modalFrameType) => {
   return (
     <ModalPortal>
-      <div className={s.modal} onClick={onClick}>
+      <div className={`${s.modal} ${className}`} onClick={onClick}>
         <div className={s.modal_container}>
           <div className={s.modal_content}>
             {children}

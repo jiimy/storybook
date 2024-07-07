@@ -50,7 +50,10 @@ https://www.chromatic.com/
 ## 실제 사용
 
 ex)
+```node
 import { Button } from "snow-white-ui";
+import 'snow-white-ui/build/styles/global.scss'; // npm에 포함된 스타일파일 사용시
+```
 
 ## ui
 

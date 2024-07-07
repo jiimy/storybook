@@ -6,8 +6,10 @@ type ButtonProps = {
   theme?: 'primary' | 'secondary';
   size?: 'small' | 'medium' | 'large';
   children: any;
+  className?: string;
   onClick?: () => void;
 }
+
 
 const ButtonStyle = styled.button<ButtonProps>`
   ${props => props.theme === 'primary' && css`
@@ -18,20 +20,23 @@ const ButtonStyle = styled.button<ButtonProps>`
     padding: 10px 16px;
   `}
 `
-
+/**
+ * Primary UI component for user interaction
+ */
 const Button = ({
   theme = 'primary',
   size = 'medium',
   onClick,
+  className,
   children
 }: ButtonProps) => {
   return (
     <ButtonStyle
       type="button"
-      className={s.button}
       theme={theme}
       size={size}
       onClick={onClick}
+      className={`${s.button} ${className}`}
     >
       {children}
     </ButtonStyle>
