@@ -1,48 +1,46 @@
 import { forwardRef } from 'react';
 import s from './tag.module.scss';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export type TagProps = {
-  closable?: boolean;
-  rounded?: boolean;
-  size?: 'lg' | 'sm';
-  children?: React.ReactNode;
-  onClose?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	closable?: boolean;
+	rounded?: boolean;
+	size?: 'lg' | 'md' | 'sm';
+	children?: React.ReactNode;
+	onClose?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	className?: string;
+	renderClose?: () => React.ReactNode;
 };
 
-const sizeStyles = {
-  sm: css`
-		padding: 5px 10px;
-		font-size: 12px;
-	`,
-  lg: css`
-		padding: 15px 20px;
-		font-size: 18px;
-	`,
-};
-
-const StyledTag = styled.span<{
-  rounded?: boolean;
-  size?: 'sm' | 'lg';
-}>`
+const StyledTag = styled.span<TagProps>`
 	border-radius: ${({ rounded }) => (rounded ? '50px' : '0px')};
-	${({ size }) => size && sizeStyles[size]}
+	padding: ${({ size }) =>
+		size === 'sm'
+			? '0.25em 0.5em'
+			: size === 'md'
+				? '0.5em 0.75em'
+				: '0.75em 1em'};
+	font-size: ${({ size }) =>
+		size === 'sm' ? '12px' : size === 'md' ? '16px' : '18px'};
 `;
 
-export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ ...props }, ref) => {
-    const closeButton = props.closable && (
-      <button className={s.close} onClick={props.onClose}>
-        x
-      </button>
-    );
-    return (
-      <StyledTag ref={ref} {...props} className={s.tag}>
-        {props.children}
-        {closeButton}
-      </StyledTag>
-    );
-  },
-);
+const Tag = forwardRef<HTMLSpanElement, TagProps>(({ ...props }, ref) => {
+	const closeButton = props.closable && (
+		<>
+			{props.renderClose ?? (
+				<button className={s.close} onClick={props.onClose}>
+					x
+				</button>
+			)}
+		</>
+	);
+	return (
+		<StyledTag ref={ref} {...props} className={`${s.tag} ${props.className}`}>
+			{props.children}
+			{closeButton}
+		</StyledTag>
+	);
+});
 
 Tag.displayName = 'Tag';
+export default Tag;

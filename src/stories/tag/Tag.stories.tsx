@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Tag from '.';
+import Tag from './Tag';
 
 const meta: Meta = {
 	title: 'Component/Tag',
@@ -13,14 +13,4 @@ export const Default: StoryObj<typeof Tag> = {
 	render: (args) => {
 		return <Tag {...args}>{(args.children = 'Tag')}</Tag>;
 	},
-};
-
-export const Icon: StoryObj<typeof Tag> = {
-	...Default,
-	render: (args) => (
-		<Tag {...args}>
-			<Tag.Icon icon={<>🦷</>} />
-			{(args.children = 'Tag')}
-		</Tag>
-	),
 };
