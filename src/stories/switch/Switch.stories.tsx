@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Switch from '.';
+import Switch from './Switch';
 import { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { useArgs } from '@storybook/preview-api';
@@ -27,10 +27,6 @@ export const Default: StoryObj<typeof Switch> = {
 			setArgs({ checked: e.target.checked });
 		};
 
-		return (
-			<Switch {...args} checked={isChecked} onChange={handleChecked}>
-				<Switch.Thumb {...args} checked={isChecked} />
-			</Switch>
-		);
+		return <Switch {...args} checked={isChecked} onChange={handleChecked} />;
 	},
 };

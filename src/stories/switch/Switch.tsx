@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import SwitchInput from './SwitchInput';
 import s from './switch.module.scss';
+import { SwitchThumb } from './SwitchThumb';
 
 export type SwitchProps = {
 	size?: 'sm' | 'md' | 'lg';
 	checked?: boolean;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	children?: React.ReactNode;
+	className?: string;
 };
 
 const SwitchWrapper = styled.label<{ size: SwitchProps['size'] }>`
@@ -24,15 +26,16 @@ const SwitchSlider = styled.span<SwitchProps>`
 `;
 
 export const Switch = (props: SwitchProps) => {
-	const { size, checked, onChange } = props;
+	const { size, checked = false, onChange, className } = props;
 	return (
-		<SwitchWrapper size={size} className={s.switch}>
+		<SwitchWrapper size={size} className={`${s.switch} ${className}`}>
 			<SwitchInput checked={checked} onChange={onChange} />
 			<SwitchSlider {...props} className={s.slider}>
+				<SwitchThumb checked={checked} size={size} />
 				{props.children}
 			</SwitchSlider>
 		</SwitchWrapper>
 	);
 };
 
-Switch.displayName = 'Switch';
+export default Switch;
