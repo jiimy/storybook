@@ -9,4 +9,3 @@ export type { modalFrameType } from './stories/modal/ModalFrame';
 
 export { default as Tag } from './stories/tag/Tag';
 export type { TagProps } from './stories/tag/Tag';
-// export { default as Button } from './stories/button/Button';
