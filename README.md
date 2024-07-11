@@ -68,7 +68,7 @@ import 'snow-white-ui/build/styles/global.scss'; // npm에 포함된 스타일�
 - 단순 컴포넌트 단위까지 할것인지.
 - 형식이 정해져있는 molecus 단위까지 할것인지
 
-- button []
+- button [ o ]
   - 테마, 사이즈, width-full 여부
 - modal []
   - dim 유무, dim 클릭 유무, 이벤트-닫기, 사이즈
