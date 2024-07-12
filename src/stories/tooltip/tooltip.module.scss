@@ -1,0 +1,26 @@
+@import '../../styles/global.scss';
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+
+	> .content {
+		position: absolute;
+		visibility: hidden;
+		padding: 0.4em;
+		color: var(--sw-primary-color);
+		background-color: var(--sw-white);
+		border: 1px solid var(--sw-primary-color);
+		border-radius: 0.25em;
+		text-align: center;
+		z-index: 1;
+		opacity: 0;
+		transition: opacity 0.3s;
+		font-size: 0.8em;
+	}
+
+	&:hover > .content {
+		visibility: visible;
+		opacity: 1;
+	}
+}

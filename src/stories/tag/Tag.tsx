@@ -9,7 +9,7 @@ export type TagProps = {
 	children?: React.ReactNode;
 	onClose?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	className?: string;
-	renderClose?: () => React.ReactNode;
+	renderClose?: React.ReactNode;
 };
 
 const StyledTag = styled.span<TagProps>`
