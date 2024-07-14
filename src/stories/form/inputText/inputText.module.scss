@@ -1,7 +1,9 @@
 .input_wrap {
   display: flex;
   flex-direction: column;
-  input + span {
+
+  input+span {
     font-weight: bold;
+    font-size: 14px;
   }
 }

@@ -29,7 +29,7 @@ export const BasicToggle: Story = {
 
     return (
       <>
-        <DropDown toggle={toggle} setToggle={setToggle} item={['목록1', '목록2']} />
+        <DropDown toggle={toggle} setToggle={setToggle} item={args.item} />
       </>
     )
   }
@@ -37,14 +37,14 @@ export const BasicToggle: Story = {
 
 export const LinkToggle: Story = {
   args: {
-    item: ['목록1', '목록2'],
+    item: [<a href="1">목록1</a>, <a href="2">목록1</a>],
   },
   render: function Render(args) {
     const [toggle, setToggle] = useState(false);
 
     return (
       <>
-        <DropDown toggle={toggle} setToggle={setToggle} item={[<a href="1">목록1</a>, <a href="1">목록1</a>]} />
+        <DropDown toggle={toggle} setToggle={setToggle} item={args.item} />
       </>
     )
   }

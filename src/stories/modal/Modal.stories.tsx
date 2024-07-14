@@ -34,7 +34,7 @@ export const Toggle: Story = {
       <>
         <button onClick={() => setModal1(true)}>모달1</button>
         {modal1 &&
-          <Modal setOnModal={() => setModal1(false)} isDim dimClick onClose>
+          <Modal setOnModal={() => setModal1(false)} dimClick={args.dimClick} isDim={args.isDim} onClose={args.onClose}>
             <Modal.Title>모달 타이틀</Modal.Title>
           </Modal>
         }

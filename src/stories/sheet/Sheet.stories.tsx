@@ -7,14 +7,17 @@ import { useState } from "react";
 const meta = {
   title: "Component/Sheet",
   component: Sheet,
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
   tags: ["autodocs"],
   parameters: {
-    // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
     layout: "fullscreen",
   },
   args: {
-  }
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ height: '400px' }}>{Story()}</div>
+    )
+  ]
 } satisfies Meta<typeof Sheet>;
 
 export default meta;
@@ -34,9 +37,7 @@ export const Toggle: Story = {
     return (
       <>
         <button onClick={openSheet}>Open Sheet</button>
-        <div>
-          <Sheet {...args} isShow={isShow} onClose={closeSheet} />
-        </div>
+        <Sheet {...args} isShow={isShow} onClose={closeSheet} />
       </>
     );
   },

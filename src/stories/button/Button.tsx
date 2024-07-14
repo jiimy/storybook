@@ -15,6 +15,7 @@ type ButtonProps = {
 const ButtonStyle = styled.button<ButtonProps>`
   ${props => props.full && css`
     width: 100%;
+    text-align: center;
   `}
 
   ${props => props.theme === 'primary' && css`
