@@ -15,6 +15,13 @@ declare const meta: {
         layout: string;
     };
     args: {};
+    decorators: ((Story: import("@storybook/types").PartialStoryFn<import("@storybook/react/dist/types-bf5e6555").R, {
+        isShow: boolean;
+        onClose: () => void;
+        children?: import("react").ReactNode;
+        isDim?: boolean | undefined;
+        height?: string | undefined;
+    }>) => import("react/jsx-runtime").JSX.Element)[];
 };
 export default meta;
 type Story = StoryObj<typeof Sheet>;

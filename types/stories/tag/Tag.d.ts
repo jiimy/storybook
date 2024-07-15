@@ -6,7 +6,7 @@ export type TagProps = {
     children?: React.ReactNode;
     onClose?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     className?: string;
-    renderClose?: () => React.ReactNode;
+    renderClose?: React.ReactNode;
 };
 declare const Tag: import("react").ForwardRefExoticComponent<TagProps & import("react").RefAttributes<HTMLSpanElement>>;
 export default Tag;
