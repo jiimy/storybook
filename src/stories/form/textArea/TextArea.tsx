@@ -5,6 +5,7 @@ import { formProps } from '../form';
 type TextAreaProps = {
   theme?: 'default' | 'auto', // default 는 높이가 정해져있음. auto 는 높이 유동적
   children?: any;
+  // size?
 }
 
 type formTextareaProps = formProps & HTMLProps<HTMLTextAreaElement>;

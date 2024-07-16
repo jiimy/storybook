@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import type { StoryObj } from "@storybook/react";
 import { Modal } from "./Modal";
 declare const meta: {

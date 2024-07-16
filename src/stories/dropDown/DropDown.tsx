@@ -6,9 +6,10 @@ type DropDownProps = {
   toggle: boolean;
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
   item: any[];
+  className?: string;
 }
 
-const DropDown = ({ toggle, setToggle, item }: DropDownProps) => {
+const DropDown = ({ toggle, setToggle, className, item }: DropDownProps) => {
   const targetRef = useRef(null);
   const handleClick = () => {
     setToggle(!toggle);
@@ -21,7 +22,8 @@ const DropDown = ({ toggle, setToggle, item }: DropDownProps) => {
 
   return (
     <div className={s.dropdown} ref={targetRef}>
-      <div className={s.btn} onClick={handleClick}>클릭</div>
+      {/* <div className={`${className} test1`} onClick={handleClick}>클릭</div> */}
+      <div className={`${s.btn} ${className} `} onClick={handleClick}>클릭</div>
       {toggle && (
         <ul>
           {item.map(child => (
@@ -34,3 +36,4 @@ const DropDown = ({ toggle, setToggle, item }: DropDownProps) => {
 };
 
 export default DropDown;
+export type { DropDownProps }
