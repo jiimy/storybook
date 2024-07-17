@@ -14,14 +14,28 @@ export type TagProps = {
 
 const StyledTag = styled.span<TagProps>`
 	border-radius: ${({ rounded }) => (rounded ? '50px' : '0px')};
-	padding: ${({ size }) =>
-		size === 'sm'
-			? '0.25em 0.5em'
-			: size === 'md'
-				? '0.5em 0.75em'
-				: '0.75em 1em'};
-	font-size: ${({ size }) =>
-		size === 'sm' ? '12px' : size === 'md' ? '16px' : '18px'};
+
+	padding: ${({ size }) => {
+		switch (size) {
+			case 'sm':
+				return '0.25em 0.5em';
+			case 'md':
+				return '0.5em 0.75em';
+			default:
+				return '0.75em 1em';
+		}
+	}};
+
+	font-size: ${({ size }) => {
+		switch (size) {
+			case 'sm':
+				return '12px';
+			case 'md':
+				return '16px';
+			default:
+				return '18px';
+		}
+	}};
 `;
 
 const Tag = forwardRef<HTMLSpanElement, TagProps>(({ ...props }, ref) => {
