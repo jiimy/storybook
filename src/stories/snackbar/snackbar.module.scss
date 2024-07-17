@@ -1,0 +1,20 @@
+.snackbar {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: var(--sw-primary-color);
+	color: var(--sw-white);
+	padding: 14px 16px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	min-width: 280px;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+}
+
+p {
+	margin: 0;
+}
