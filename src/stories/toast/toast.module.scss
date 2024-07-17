@@ -12,6 +12,7 @@
 }
 
 .toast {
+  position: relative;
   width: fit-content;
   max-width: 100%;
   height: fit-content;
@@ -20,4 +21,11 @@
   box-sizing: border-box;
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.15), 0 3px 7px rgba(0, 0, 0, 0.22);
   pointer-events: auto;
+
+  .progressbar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #ccc;
+  }
 }
