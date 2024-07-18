@@ -17,11 +17,12 @@ const meta: Meta = {
 export default meta;
 
 export const Default: StoryObj<typeof Tooltip> = {
+	args: {
+		position: 'top',
+		content: <>Tooltip</>,
+		children: <div>Trigger</div>,
+	},
 	render: (args) => {
-		return (
-			<Tooltip {...args} content={<>Tooltip</>}>
-				<div>Trigger</div>
-			</Tooltip>
-		);
+		return <Tooltip {...args} />;
 	},
 };
