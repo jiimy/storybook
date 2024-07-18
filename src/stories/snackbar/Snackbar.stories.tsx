@@ -12,11 +12,13 @@ const meta: Meta = {
 export default meta;
 
 export const Default: StoryObj<typeof Snackbar> = {
-	render: function Render() {
+	render: function Render(args) {
 		const [isOpen, setIsOpen] = useState(false);
 		return (
 			<>
-				<Snackbar open={isOpen}>스낵바 컴포넌트</Snackbar>
+				<Snackbar open={isOpen} {...args}>
+					스낵바 컴포넌트
+				</Snackbar>
 				<Button onClick={() => setIsOpen(true)}>Click</Button>
 			</>
 		);
@@ -25,11 +27,11 @@ export const Default: StoryObj<typeof Snackbar> = {
 
 export const Icon: StoryObj<typeof Snackbar> = {
 	...Default,
-	render: function Render() {
+	render: function Render(args) {
 		const [isOpen, setIsOpen] = useState(false);
 		return (
 			<>
-				<Snackbar open={isOpen}>
+				<Snackbar open={isOpen} {...args}>
 					<Snackbar.Image>🐤</Snackbar.Image>
 					<Snackbar.Description>스낵바 컴포넌트</Snackbar.Description>
 				</Snackbar>

@@ -1,69 +1,78 @@
-import { forwardRef } from 'react';
 import s from './snackbar.module.scss';
-
-type ActionProps = {
-	children?: React.ReactNode;
-};
-
-/**
- * Snackbar Action
- */
-export const SnackbarAction = forwardRef<HTMLSpanElement, ActionProps>(
-	(props, ref) => {
-		return <span ref={ref}>{props.children}</span>;
-	},
-);
-
-SnackbarAction.displayName = 'SnackbarAction';
-
-// ------------------
-// ------------------
-
-type ImageProps = {
-	children?: React.ReactNode;
-};
-
-/**
- * Snackbar Image
- */
-export const SnackbarImage = ({ children }: ImageProps) => {
-	return <div>{children}</div>;
-};
-
-SnackbarImage.displayName = 'SnackbarImage';
-
-// ----------------------
-// ----------------------
-
-type DescriptionProps = {
-	children?: React.ReactNode | string;
-};
-
-/**
- * Snackbar Description
- */
-export const SnackbarDescription = ({ children }: DescriptionProps) => {
-	return <p>{children}</p>;
-};
-
-SnackbarDescription.displayName = 'SnackbarDescription';
-
-// ----------------------
-// ----------------------
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+import {
+	SnackbarAction,
+	SnackbarDescription,
+	SnackbarImage,
+} from './SnackbarItem';
+import { useEffect, useState } from 'react';
 
 type SnackbarProps = {
 	open?: boolean;
+	position?: 'tl' | 'tc' | 'tr' | 'bl' | 'bc' | 'br';
 	children?: React.ReactNode | string;
+	duration?: number;
+	visible?: boolean;
 };
 
-export const SnackbarRoot = (props: SnackbarProps) => {
-	const { open, children } = props;
+const SnackbarContainer = styled.div<SnackbarProps>`
+	${({ position }) => {
+		switch (position) {
+			case 'tl':
+				return 'top: 20px; left: 20px;';
+			case 'tc':
+				return 'top: 20px; left: 50%; transform: translateX(-50%);';
+			case 'tr':
+				return 'top: 20px; right: 20px;';
+			case 'bl':
+				return 'bottom: 20px; left: 20px;';
+			case 'bc':
+				return 'bottom: 20px; left: 50%; transform: translateX(-50%);';
+			case 'br':
+				return 'bottom: 20px; right: 20px;';
+		}
+	}}
+	opacity: ${({ visible }) => (visible ? 1 : 0)};
+	transform: ${({ visible }) =>
+		visible ? 'translateY(0)' : 'translateY(20px)'};
+`;
 
-	if (open) {
-		return <div className={s.snackbar}>{children}</div>;
+export const SnackbarRoot = (props: SnackbarProps) => {
+	const { open, position = 'br', duration = 3000, children } = props;
+	const [isVisible, setIsVisible] = useState(false);
+	const [isMount, setIsMount] = useState(open);
+
+	useEffect(() => {
+		if (open) {
+			setIsMount(true);
+			const showTimer = setTimeout(() => setIsVisible(true), 100);
+			const hideTimer = setTimeout(() => setIsVisible(false), duration);
+			const unMountTimer = setTimeout(() => setIsMount(false), 300);
+
+			return () => {
+				clearTimeout(showTimer);
+				clearTimeout(hideTimer);
+				clearTimeout(unMountTimer);
+			};
+		}
+	}, [open, duration]);
+
+	if (!open) {
+		return null;
 	}
 
-	return null;
+	return ReactDOM.createPortal(
+		<SnackbarContainer
+			className={s.snackbar}
+			position={position}
+			open={isMount}
+			visible={isVisible}
+		>
+			{children}
+		</SnackbarContainer>,
+		document.body,
+	);
 };
 
 const Snackbar = Object.assign(SnackbarRoot, {
