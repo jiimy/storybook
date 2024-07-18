@@ -44,7 +44,7 @@ export const Basic: Story = {
         <ToastWrapper startDirection={args.startDirection}>
           {
             isOpen &&
-            <Toast state={args.state} onClose={() => handleClose} >
+            <Toast state={args.state} onClose={() => setIsOpen(false)} >
               토스트 내용 1
             </Toast>
           }

@@ -7,6 +7,7 @@ import { updownMotion } from '../../styles/animation';
 export type toastProps = {
   startDirection?: 'top-right' | 'top-center' | 'top-left' | 'bottom-left' | 'bottom-center' | 'bottom-right', // 보여지는 방향
   timer?: number, // 보여진 후 timer 시간 뒤 사라짐
+  duration?: number, // 올라가는 시간, 내려가는 시간
   pauseOnHover?: boolean, // 마우스 오버일때만 timer 중지
   state?: 'error' | 'success' | 'warning',
   hideProgressBar?: boolean, // 진행 시간 바 
@@ -67,6 +68,7 @@ export const ToastWrapper = ({ ...props }: toastProps) => {
 const Toast = ({
   startDirection = 'top-center',
   timer = 3000,
+  duration = 200,
   hideProgressBar = false,
   className,
   children,
@@ -86,8 +88,8 @@ const Toast = ({
     timeoutId = setTimeout(() => {
       onClose(false);
       // setVisible(false);
-      // onClose(visible);
-    }, timer);
+      onClose(false);
+    }, timer + duration);
     return () => clearTimeout(timeoutId);
   }, [timer, onClose]);
 
