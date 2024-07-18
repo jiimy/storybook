@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import s from './toast.module.scss';
 import { HideProgressBarStyle, ToastWrapperStyle } from './ToastStyle';
+import { updownMotion } from '../../styles/animation';
 
 export type toastProps = {
   startDirection?: 'top-right' | 'top-center' | 'top-left' | 'bottom-left' | 'bottom-center' | 'bottom-right', // 보여지는 방향
@@ -9,32 +10,43 @@ export type toastProps = {
   pauseOnHover?: boolean, // 마우스 오버일때만 timer 중지
   state?: 'error' | 'success' | 'warning',
   hideProgressBar?: boolean, // 진행 시간 바 
-  children?: any,
-  isOpen?: boolean,
-  onClose?: boolean,
-  className?: any
+  children?: React.ReactNode,
+  // onClose?: React.Dispatch<React.SetStateAction<boolean>>,
+  onClose?: any; // TODO: any 수정하기
+  className?: string
 }
+
+const FadeIn = () => keyframes`
+ from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+`
+
+const FadeOut = () => keyframes`
+from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+`
+
+const positionType = (startDirection: any, timer: any) => {
+  switch (startDirection) {
+    case "top-center":
+      return css
+        `${FadeIn} 0.2s, ${FadeOut} 0.2s ${timer / 1000}s forwards;`
+    case "blue":
+      return css
+        `${FadeIn} 0.5s, ${FadeOut} 0.5s 2.5s`
+    case "gray":
+      return css
+        `${FadeIn} 0.5s, ${FadeOut} 0.5s 2.5s`
+    default:
+      return null;
+  }
+}
+
+
+// const ToastStyle = styled.div<{ startDirection : string, timer: any}>`
 const ToastStyle = styled.div<toastProps>`
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-
-  ${ToastWrapperStyle}:hover & {
-    transition: none; /* 마우스 오버시에는 애니메이션 중지 */
-  }
-
-  ${ToastWrapperStyle} ${ToastWrapperStyle}:not(:hover) & {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  }
-
-  ${props => props.startDirection === 'top-center' && css`
-    position: absolute;
-    top: -100px; /* Starting position off-screen */
-    left: 50%;
-    transform: translateX(-50%);
-    transition: top 0.3s ease-in-out;
-  `}
+visibility: visible;
+animation: ${({ startDirection, timer }) => positionType(startDirection, timer)};
 `
 
 export const ToastWrapper = ({ ...props }: toastProps) => {
@@ -52,23 +64,37 @@ export const ToastWrapper = ({ ...props }: toastProps) => {
  * <br/>
  * 아래-센터 -> 아래에서 시작, 위-양쪽 -> 양쪽에서 시작
  */
-const Toast = ({ startDirection = 'top-right', timer = 300, hideProgressBar = false, className, children, state, isOpen, onClose, ...props }: toastProps) => {
-  // const [visible, setVisible] = useState(true);
-  // const [visible, setVisible] = useState(props.isOpen);
+const Toast = ({
+  startDirection = 'top-center',
+  timer = 3000,
+  hideProgressBar = false,
+  className,
+  children,
+  state = 'success',
+  onClose,
+  ...props
+}: toastProps) => {
+  const [visible, setVisible] = useState(true);
+  const [clickcount, setClickCount] = useState([]);
+
+  useEffect(() => {
+    console.log('여는 이벤트 발생');
+  }, [])
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-    if (isOpen) {
-      timeoutId = setTimeout(() => {
-        // onClose(true)
-      }, timer);
-    }
+    timeoutId = setTimeout(() => {
+      onClose(false);
+      // setVisible(false);
+      // onClose(visible);
+    }, timer);
     return () => clearTimeout(timeoutId);
-  }, [isOpen, timer, onClose]);
+  }, [timer, onClose]);
 
   return (
     <ToastStyle {...props} startDirection={startDirection} timer={timer} className={`${className} ${s.toast}`}>
       {children}
+      {onClose && <div onClick={() => { setVisible(false); onClose(); }}>닫기</div>}
       {!hideProgressBar && <HideProgressBarStyle timer={timer} state={state} className={s.progressbar} />}
     </ToastStyle>
   );

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Toast, { ToastWrapper } from "./Toast";
 import Button from "../button/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const meta: Meta<typeof Toast> = {
   title: "Component/Toast",
@@ -27,15 +27,24 @@ export const Basic: Story = {
     startDirection: 'top-center'
   },
   render: function Render(args) {
-    const [on, setOn] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleClose = (isOpen: boolean) => {
+      setIsOpen(isOpen);
+      console.log()
+    };
+    useEffect(() => {
+
+    }, [])
 
     return (
       <>
-        <Button onClick={() => args.isOpen === true}>토스트 오픈</Button>
+        {/* <Button onClick={() => setOn(true)}>토스트 오픈</Button> */}
+        <Button onClick={() => setIsOpen(true)}>토스트 오픈</Button>
         <ToastWrapper startDirection={args.startDirection}>
           {
-            // on &&
-            <Toast state={args.state} isOpen={args.isOpen} onClose={args.onClose}>
+            isOpen &&
+            <Toast state={args.state} onClose={() => handleClose} >
               토스트 내용 1
             </Toast>
           }

@@ -41,6 +41,7 @@ export const HideProgressBarStyle = styled.div<{ state?: string, timer: number }
     position: absolute;
     left: 0;
     top: 0;
+    height: 100%;
     background: ${({ state }) => `var(--sw-${state}-color)`};
     animation: ${({ timer }) => progressAnimation(timer)} ${({ timer }) => timer / 1000}s forwards;
     content:'';
