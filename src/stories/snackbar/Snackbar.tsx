@@ -1,6 +1,6 @@
 import s from './snackbar.module.scss';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import {
 	SnackbarAction,
 	SnackbarDescription,
@@ -12,53 +12,73 @@ type SnackbarProps = {
 	open?: boolean;
 	position?: 'tl' | 'tc' | 'tr' | 'bl' | 'bc' | 'br';
 	children?: React.ReactNode | string;
-	duration?: number;
-	visible?: boolean;
 };
 
-const SnackbarContainer = styled.div<SnackbarProps>`
+const slideInTop = keyframes`
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+`;
+
+const slideOutTop = keyframes`
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-20px); opacity: 0; }
+`;
+
+const slideInBottom = keyframes`
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+`;
+
+const slideOutBottom = keyframes`
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(20px); opacity: 0; }
+`;
+
+const SnackbarContainer = styled.div<SnackbarProps & { visible: boolean }>`
 	${({ position }) => {
 		switch (position) {
 			case 'tl':
 				return 'top: 20px; left: 20px;';
 			case 'tc':
-				return 'top: 20px; left: 50%; transform: translateX(-50%);';
+				return 'top: 20px; left: 50%;';
 			case 'tr':
 				return 'top: 20px; right: 20px;';
 			case 'bl':
 				return 'bottom: 20px; left: 20px;';
 			case 'bc':
-				return 'bottom: 20px; left: 50%; transform: translateX(-50%);';
+				return 'bottom: 20px; left: 50%;';
 			case 'br':
 				return 'bottom: 20px; right: 20px;';
+			default:
+				return 'bottom: 20px; left: 50%;';
 		}
 	}}
 	opacity: ${({ visible }) => (visible ? 1 : 0)};
-	transform: ${({ visible }) =>
-		visible ? 'translateY(0)' : 'translateY(20px)'};
+	animation: ${({ visible, position }) => {
+			if (position?.startsWith('t')) {
+				return visible ? slideInTop : slideOutTop;
+			} else {
+				return visible ? slideInBottom : slideOutBottom;
+			}
+		}}
+		0.3s ease-in-out;
+	transition: opacity 0.3s ease-in-out;
 `;
 
 export const SnackbarRoot = (props: SnackbarProps) => {
-	const { open, position = 'br', duration = 3000, children } = props;
+	const { open, position = 'br', children } = props;
 	const [isVisible, setIsVisible] = useState(false);
-	const [isMount, setIsMount] = useState(open);
-
 	useEffect(() => {
 		if (open) {
-			setIsMount(true);
-			const showTimer = setTimeout(() => setIsVisible(true), 100);
-			const hideTimer = setTimeout(() => setIsVisible(false), duration);
-			const unMountTimer = setTimeout(() => setIsMount(false), 300);
-
-			return () => {
-				clearTimeout(showTimer);
-				clearTimeout(hideTimer);
-				clearTimeout(unMountTimer);
-			};
+			const showTimer = setTimeout(() => setIsVisible(true), 200);
+			return () => clearTimeout(showTimer);
+		} else {
+			const hideTimer = setTimeout(() => setIsVisible(false), 500);
+			return () => clearTimeout(hideTimer);
 		}
-	}, [open, duration]);
+	}, [open]);
 
-	if (!open) {
+	if (!isVisible) {
 		return null;
 	}
 
@@ -66,8 +86,7 @@ export const SnackbarRoot = (props: SnackbarProps) => {
 		<SnackbarContainer
 			className={s.snackbar}
 			position={position}
-			open={isMount}
-			visible={isVisible}
+			visible={isVisible && open!}
 		>
 			{children}
 		</SnackbarContainer>,

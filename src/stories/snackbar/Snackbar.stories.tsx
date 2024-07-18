@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Snackbar from './Snackbar';
-import { useState } from 'react';
 import Button from '../button/Button';
+import { useHandleSnackbar } from './useHandleSnackbar';
 
 const meta: Meta = {
 	title: 'Component/Snackbar',
@@ -13,13 +13,13 @@ export default meta;
 
 export const Default: StoryObj<typeof Snackbar> = {
 	render: function Render(args) {
-		const [isOpen, setIsOpen] = useState(false);
+		const { isOpen, openSnackbar } = useHandleSnackbar(3000);
 		return (
 			<>
 				<Snackbar open={isOpen} {...args}>
 					스낵바 컴포넌트
 				</Snackbar>
-				<Button onClick={() => setIsOpen(true)}>Click</Button>
+				<Button onClick={openSnackbar}>Click</Button>
 			</>
 		);
 	},
@@ -28,14 +28,14 @@ export const Default: StoryObj<typeof Snackbar> = {
 export const Icon: StoryObj<typeof Snackbar> = {
 	...Default,
 	render: function Render(args) {
-		const [isOpen, setIsOpen] = useState(false);
+		const { isOpen, openSnackbar } = useHandleSnackbar(3000);
 		return (
 			<>
 				<Snackbar open={isOpen} {...args}>
 					<Snackbar.Image>🐤</Snackbar.Image>
 					<Snackbar.Description>스낵바 컴포넌트</Snackbar.Description>
 				</Snackbar>
-				<Button onClick={() => setIsOpen(true)}>Click</Button>
+				<Button onClick={openSnackbar}>Click</Button>
 			</>
 		);
 	},
