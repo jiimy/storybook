@@ -59,6 +59,8 @@ export const ToastWrapper = ({ ...props }: toastProps) => {
 }
 
 /**
+ * 현재 버전인 storybook 8버전에서 context api 를 stories에서 사용할 방법을 찾기 못하여 context api 가 있어야 여러 기능을 사용할수 있는 toast는 미완성 상태로 임시 종료
+ * 
  * Toast 컴포넌트는 스택형으로 쌓이기 때문에 감싸는 영역인 ToastWrapper 가 필수적으로 필요합니다. root에 감싸주면 매번 추가할 필요가 없습니다.
  * <br/><br/>
  * 위-센터 -> 위에서 시작. 위-양쪽 -> 양쪽에서 시작 
@@ -86,7 +88,6 @@ const Toast = ({
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     timeoutId = setTimeout(() => {
-      onClose(false);
       // setVisible(false);
       onClose(false);
     }, timer + duration);
@@ -98,8 +99,11 @@ const Toast = ({
       {children}
       {onClose && <div onClick={() => { setVisible(false); onClose(); }}>닫기</div>}
       {!hideProgressBar && <HideProgressBarStyle timer={timer} state={state} className={s.progressbar} />}
+
     </ToastStyle>
   );
 };
+
+
 
 export default Toast;

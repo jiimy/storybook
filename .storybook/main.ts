@@ -15,6 +15,7 @@ const config: StorybookConfig = {
     "@chromatic-com/storybook",
     "@storybook/addon-styling-webpack",
     "@storybook/addon-storysource",
+    "@storybook/storybook-react-context"
   ],
 
   framework: {
@@ -38,6 +39,7 @@ const config: StorybookConfig = {
   previewHead: (head) => `
     ${head}
     <div id="modal"></div>
+    <div id="root"></div>
   `,
 };
 export default config;

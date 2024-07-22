@@ -1,18 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Toast, { ToastWrapper } from "./Toast";
+import { useState } from "react";
 import Button from "../button/Button";
-import { useEffect, useState } from "react";
+import Toast, { ToastWrapper } from "./Toast";
+import { Toast2, ToastProvider, UserDisplay, UserProvider, UserUpdate } from "./Toast2";
 
 const meta: Meta<typeof Toast> = {
   title: "Component/Toast",
   component: Toast,
   parameters: {
   },
-  decorators: [
-    (Story) => (
-      <div style={{ height: '200px' }}>{Story()}</div>
-    )
-  ],
+  // decorators: [
+  //   (Story) => (
+  //     <ToastProvider>
+  //       <Story/>
+  //       <Button
+  //         onClick={() => Toast2.error('에러')}
+  //       >토스트 열기</Button>
+  //     </ToastProvider>
+  //   )
+  // ],
   tags: ["autodocs"],
   argTypes: {
   },
@@ -29,14 +35,6 @@ export const Basic: Story = {
   render: function Render(args) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleClose = (isOpen: boolean) => {
-      setIsOpen(isOpen);
-      console.log()
-    };
-    useEffect(() => {
-
-    }, [])
-
     return (
       <>
         {/* <Button onClick={() => setOn(true)}>토스트 오픈</Button> */}
@@ -44,11 +42,38 @@ export const Basic: Story = {
         <ToastWrapper startDirection={args.startDirection}>
           {
             isOpen &&
-            <Toast state={args.state} onClose={() => setIsOpen(false)} >
+            <Toast state={args.state} onClose={() => setIsOpen(false)}>
               토스트 내용 1
             </Toast>
           }
         </ToastWrapper>
+      </>
+    )
+  }
+}
+
+export const ToastSecond: Story = {
+  render: function Render(args) {
+    return (
+      <>
+        <ToastProvider>
+          <Button
+            onClick={() => Toast2.error('에러')}
+          >토스트 열기</Button>
+        </ToastProvider>
+      </>
+    )
+  }
+}
+
+export const TestFirst: Story = {
+  render: function Render(args) {
+    return (
+      <>
+        <UserProvider>
+          <UserDisplay />
+          <UserUpdate />
+        </UserProvider>
       </>
     )
   }
