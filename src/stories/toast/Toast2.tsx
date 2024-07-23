@@ -32,6 +32,15 @@ const ToastContainer = ({ messages, closeMessage }: { messages: Message[], close
   );
 };
 
+const TestToastContainer = () => {
+  const Root = document.getElementById('root') as HTMLElement;
+
+  return ReactDOM.createPortal(
+    <div>여기</div>,
+    Root
+  );
+};
+
 
 
 let idCounter = 0;
@@ -59,6 +68,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       type,
     };
     setMessages((prevMessages) => [...prevMessages, newMessage]);
+    alert('addMessage');
   }, []);
 
   const closeMessage = useCallback((id: number) => {
@@ -70,6 +80,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     <ToastContext.Provider value={{ addMessage }}>
       {/* <ToastContainer messages={messages} closeMessage={closeMessage} /> */}
       {children}
+      <TestToastContainer />
     </ToastContext.Provider>
   );
 };
@@ -84,9 +95,8 @@ export const Toast2 = {
     addMessage(message, 'warning');
   },
   error: (message: string) => {
-    // const { addMessage } = UseToast();
-    // addMessage(message, 'error');
-    alert('aa');
+    const { addMessage } = UseToast();
+    addMessage(message, 'error');
   },
   info: (message: string) => {
     const { addMessage } = UseToast();
@@ -95,23 +105,12 @@ export const Toast2 = {
 };
 // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 type UserContextType = {
-  name: string;
-  setName: (name: string) => void;
+  addName: (name: string, age?: number) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [name, setName] = useState<string>('John Doe');
-
-  return (
-    <UserContext.Provider value={{ name, setName }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
-
-export const useUser = () => {
+export const UseUser = () => {
   const context = useContext(UserContext);
   if (!context) {
     throw new Error('useUser must be used within a UserProvider');
@@ -119,31 +118,23 @@ export const useUser = () => {
   return context;
 };
 
-// 
-export const UserDisplay = () => {
-  const { name } = useUser();
+export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const [name, setName] = useState<string>('John Doe');
 
-  return <div>User Name: {name}</div>;
-};
-
-// 
-export const UserUpdate = () => {
-  const { setName } = useUser();
-  const [newName, setNewName] = useState('');
-
-  const updateName = () => {
-    setName(newName);
-  };
+  const addName = useCallback((name: string, age?: number) => {
+    console.log('TestName 클릭', name, age);
+  }, []);
 
   return (
-    <div>
-      <input
-        type="text"
-        value={newName}
-        onChange={(e) => setNewName(e.target.value)}
-        placeholder="Enter new name"
-      />
-      <button onClick={updateName}>Update Name</button>
-    </div>
+    <UserContext.Provider value={{ addName }}>
+      {children}
+    </UserContext.Provider>
   );
 };
+
+export const Test2 = {
+  aaa: (name: string, age?: number) => {
+    const { addName } = UseUser();
+    addName(name, age);
+  }
+}

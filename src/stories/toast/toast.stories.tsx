@@ -2,23 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import Button from "../button/Button";
 import Toast, { ToastWrapper } from "./Toast";
-import { Toast2, ToastProvider, UserDisplay, UserProvider, UserUpdate } from "./Toast2";
+import { Test2, Toast2, ToastProvider } from "./Toast2";
 
 const meta: Meta<typeof Toast> = {
   title: "Component/Toast",
   component: Toast,
   parameters: {
   },
-  // decorators: [
-  //   (Story) => (
-  //     <ToastProvider>
-  //       <Story/>
-  //       <Button
-  //         onClick={() => Toast2.error('에러')}
-  //       >토스트 열기</Button>
-  //     </ToastProvider>
-  //   )
-  // ],
   tags: ["autodocs"],
   argTypes: {
   },
@@ -66,14 +56,24 @@ export const ToastSecond: Story = {
   }
 }
 
+const Teast = () => {
+  return (
+    <Button
+      onClick={() => Test2.aaa('111')}
+    >버튼</Button>
+  )
+}
+
 export const TestFirst: Story = {
   render: function Render(args) {
     return (
       <>
-        <UserProvider>
-          <UserDisplay />
-          <UserUpdate />
-        </UserProvider>
+        {/* <UserDisplay />
+        <UserUpdate /> */}
+        {/* <Button
+          onClick={() => Test2.aaa('111')}
+        >버튼</Button> */}
+        <Teast />
       </>
     )
   }
