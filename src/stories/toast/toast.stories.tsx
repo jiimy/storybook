@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import Button from "../button/Button";
 import Toast, { ToastWrapper } from "./Toast";
-import { Test2, Toast2, ToastProvider } from "./Toast2";
+import { Toast2 } from "./Toast2";
+import { Toast3, ToastProvider } from "./Toast3";
 
 const meta: Meta<typeof Toast> = {
   title: "Component/Toast",
@@ -56,24 +57,26 @@ export const ToastSecond: Story = {
   }
 }
 
-const Teast = () => {
-  return (
-    <Button
-      onClick={() => Test2.aaa('111')}
-    >버튼</Button>
-  )
-}
-
 export const TestFirst: Story = {
   render: function Render(args) {
+    const [on, setOn] = useState(false);
+
+    const open = () => {
+      setOn(true);
+    }
+
     return (
       <>
-        {/* <UserDisplay />
-        <UserUpdate /> */}
-        {/* <Button
-          onClick={() => Test2.aaa('111')}
-        >버튼</Button> */}
-        <Teast />
+        {/* <UserProvider>
+          <UserDisplay />
+          <UserUpdate />
+        </UserProvider> */}
+        <ToastProvider>
+          <div>
+            <button onClick={open}>버튼</button>
+            {on && <Toast3 type="info">메시지</Toast3>}
+          </div>
+        </ToastProvider>
       </>
     )
   }

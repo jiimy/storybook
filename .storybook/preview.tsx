@@ -13,13 +13,13 @@ const preview: Preview = {
     },
   },
   // NOTE: context api 테스트코드. 
-  decorators: [
-    (Story) => (
-      <UserProvider>
-        <Story />
-      </UserProvider>
-    ),
-  ],
+  // decorators: [
+  //   (Story) => (
+  //     <UserProvider>
+  //       <Story />
+  //     </UserProvider>
+  //   ),
+  // ],
 };
 
 
