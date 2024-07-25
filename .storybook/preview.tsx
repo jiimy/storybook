@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
 import React from "react";
-import { UserProvider } from '../src/stories/toast/Toast2'
+import { ToastProvider4 } from '../src/stories/toast/Toast4';
 
 const preview: Preview = {
   parameters: {
@@ -12,7 +12,7 @@ const preview: Preview = {
       },
     },
   },
-  // NOTE: context api 테스트코드. 
+  // NOTE: context api 테스트코드.
   // decorators: [
   //   (Story) => (
   //     <UserProvider>

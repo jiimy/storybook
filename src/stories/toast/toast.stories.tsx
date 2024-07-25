@@ -4,6 +4,7 @@ import Button from "../button/Button";
 import Toast, { ToastWrapper } from "./Toast";
 import { Toast2 } from "./Toast2";
 import { Toast3, ToastProvider } from "./Toast3";
+import { Toast4, ToastProvider4 } from "./Toast4";
 
 const meta: Meta<typeof Toast> = {
   title: "Component/Toast",
@@ -43,41 +44,63 @@ export const Basic: Story = {
   }
 }
 
-export const ToastSecond: Story = {
-  render: function Render(args) {
-    return (
-      <>
-        <ToastProvider>
-          <Button
-            onClick={() => Toast2.error('에러')}
-          >토스트 열기</Button>
-        </ToastProvider>
-      </>
-    )
-  }
-}
+// export const ToastSecond: Story = {
+//   render: function Render(args) {
+//     return (
+//       <>
+//         <ToastProvider>
+//           <Button
+//             onClick={() => Toast2.error('에러')}
+//           >토스트 열기</Button>
+//         </ToastProvider>
+//       </>
+//     )
+//   }
+// }
 
-export const TestFirst: Story = {
-  render: function Render(args) {
-    const [on, setOn] = useState(false);
+// 컴포넌트 형식은 되나, 객체를 불러오는것은 hook에러가 남
+//  <UserProvider>
+// <UserDisplay />
+// <UserUpdate />
+// </UserProvider>
+// export const ToastThird: Story = {
+//   render: function Render(args) {
+//     const [on1, setOn1] = useState(false);
+//     const [on2, setOn2] = useState(false);
 
-    const open = () => {
-      setOn(true);
-    }
+//     const open1 = () => {
+//       setOn1(true);
+//     }
+//     const open2 = () => {
+//       setOn2(true);
+//     }
 
-    return (
-      <>
-        {/* <UserProvider>
-          <UserDisplay />
-          <UserUpdate />
-        </UserProvider> */}
-        <ToastProvider>
-          <div>
-            <button onClick={open}>버튼</button>
-            {on && <Toast3 type="info">메시지</Toast3>}
-          </div>
-        </ToastProvider>
-      </>
-    )
-  }
-}
+//     return (
+//       <>
+//         <ToastProvider>
+//           <div>
+//             <button onClick={open1}>버튼1</button>
+//             {on1 && <Toast3 type="info">메시지1</Toast3>}
+//             <button onClick={open2}>버튼2</button>
+//             {on2 && <Toast3 type="info">메시지2</Toast3>}
+//           </div>
+//         </ToastProvider>
+//       </>
+//     )
+//   }
+// }
+
+
+// export const ToastFourth: Story = {
+//   render: function Redner(args) {
+//     return (
+//       <>
+//         <ToastProvider4>
+//           <Button
+//             onClick={() => Toast4.success('이름')}
+//           >버튼</Button>
+//         </ToastProvider4>
+//       </>
+//     )
+//   }
+// }
