@@ -66,7 +66,7 @@ export const PagingApi: Story = {
 
     return (
       <>
-        <Pagination theme="default" totalPost={24} setCurrentPage={setIndex} currentPage={index} btnRange={10} />
+        <Pagination theme="default" totalPost={104} setCurrentPage={setIndex} currentPage={index} btnRange={10} />
       </>
     )
   }
