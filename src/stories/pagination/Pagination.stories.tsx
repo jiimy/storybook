@@ -57,7 +57,7 @@ export const PagingApi: Story = {
 
     // 1. 페이징 처리가 안되어있는 api 일 경우
     useEffect(() => {
-      console.log('dindex', index);
+      // console.log('dindex', index);
       axios
         .get(`https://jsonplaceholder.typicode.com/photos?_page=${index}&_limit=${viewPageCount}`)
         .then((res) => console.log('dd', res.data))
@@ -66,7 +66,7 @@ export const PagingApi: Story = {
 
     return (
       <>
-        <Pagination theme="default" totalPost={104} setCurrentPage={setIndex} currentPage={index} btnRange={10} />
+        <Pagination theme="default" totalPost={172} setCurrentPage={setIndex} currentPage={index} btnRange={10} />
       </>
     )
   }

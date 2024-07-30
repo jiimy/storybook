@@ -39,7 +39,7 @@ const Pagination = ({
 
   // 그룹이 바뀔때 남는 갯수만큼 버튼 보여주기
   useEffect(() => {
-    console.log(`여기 ${btnRange} ${pageRange} ${totalPost} ${btnGroupIndex}`);
+    // console.log(`여기 ${btnRange} ${pageRange} ${totalPost} ${btnGroupIndex}`);
     // 1그룹이 안될경우
     if (btnRange * pageRange > totalPost) {
       const calc = Math.ceil(totalPost / pageRange);
@@ -48,16 +48,15 @@ const Pagination = ({
     // 2그룹이상인 경우 남는 버튼만 보여주기
   } else {
       setRenderButton(btnRange)
-      console.log(`else : ${Math.ceil(btnREnderRange / btnRange) }
-        ${Math.ceil(btnREnderRange / pageRange) }
-      `
-    )
-    // 마지막 그룹일때 : 올림(맨마지막 버튼 11 / 버튼 범위 10)  === 그룹 인덱스 2
+      // 마지막 그룹일때 : 올림(맨마지막 버튼 11 / 버튼 범위 10)  === 그룹 인덱스 2
       if (Math.ceil(currentBtn / btnRange) === Math.ceil(btnREnderRange / pageRange )) {
-      // if (Math.ceil(btnREnderRange / btnRange) === btnGroupIndex) {
+        // if (Math.ceil(btnREnderRange / btnRange) === btnGroupIndex) {
+        console.log(`else : ${Math.ceil(btnREnderRange / btnRange) }
+          ${Math.ceil(btnREnderRange / pageRange) }`)
         const residue = Math.ceil((totalPost - (btnRange * pageRange)) / pageRange)
+        const calcresidue = residue > 10 ? residue - 10 : residue
         console.log(`남는거? ${residue}` )
-        setRenderButton(residue);
+        setRenderButton(calcresidue);
         // setRenderButton(2);
       }
     // setRenderButton(btnREnderRange);
@@ -92,20 +91,35 @@ const Pagination = ({
     <>
     {theme === 'auto' && 
       <div className={s.pagination}>
-        <Button >{'<<'}</Button>
-        <PrevButton/>
+          {
+            currentBtn > 1 &&
+            <>
+              <StartButton />
+              <PrevButton />
+            </>
+          }
         <div>
-            {array.map((item, index) => 
-              <Button onClick={() => setCurrentPage(index + 1)}
-                theme='secondary'
-                // TODO: 이 부분 styled로 할지 scss로 할지 고민중
-                className={classNames('', {
-                  [s.is_select]: currentBtn === index + 1
-                })} key={index} >{index + 1}</Button>
-            )}
+            {Array(renderButton)
+              .fill(startPage + 1) // TODO: 여기에서 처리하면 될듯
+              .map((_, index) => {
+                return (
+                  <Button
+                    key={index}
+                    theme='secondary'
+                    onClick={() => setCurrentBtn(startPage + index)
+                    }
+                  >
+                    {startPage + index}
+                  </Button>
+                );
+              })}
         </div>
-          <NextButton />
-        <Button>{'>>'}</Button>
+          {
+            btnREnderRange !== currentBtn && <>
+              <NextButton />
+              <EndButton />
+            </>
+          }
       </div>
     }
       {theme === 'default' &&
