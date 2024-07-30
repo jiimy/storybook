@@ -1,0 +1,23 @@
+@import '../../styles/global.scss';
+
+.pagination {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+
+  .buttons,
+  button {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  button {
+    &:hover {
+      background: lighten(map-get($color-map, secondary-color), 20%);
+    }
+
+    &:global(.is_select) {
+      color: red;
+    }
+  }
+}
