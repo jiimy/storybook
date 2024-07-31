@@ -40,8 +40,7 @@ export const NoPagingApi: Story = {
 
     return (
       <>
-        데이터
-        <Pagination theme="auto" totalPost={202} setCurrentPage={setIndex} currentPage={index} />
+        <Pagination theme="auto" totalPost={202} setCurrentPage={setIndex} currentPage={index} btnRange={5} />
       </>
     )
   }

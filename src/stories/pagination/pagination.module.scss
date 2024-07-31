@@ -16,8 +16,8 @@
       background: lighten(map-get($color-map, secondary-color), 20%);
     }
 
-    &:global(.is_select) {
-      color: red;
+    &.is_select {
+      background: darken(map-get($color-map, secondary-color), 20%);
     }
   }
 }
