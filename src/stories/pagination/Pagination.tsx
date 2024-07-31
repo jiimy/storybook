@@ -7,6 +7,7 @@ import classNames from 'classnames';
 type paginationType = {
   theme?: 'auto' | 'default', // auto일 경우 항상 선택한 번호가 가운데를 넘지 않음. default 일 경우 마지막 번호를 선택하면 자동으로 다음 번호가 나오지 않음. 
   isButton?: boolean,
+  className?: any,
 
   setCurrentPage: (index: number) => void, // 현재 선택된 index
   currentPage: number, // 현재 페이지
@@ -16,8 +17,10 @@ type paginationType = {
 }
 
 /**
- * theme - auto : 5개 이고 auto이면 선택한 index가 4이상일때 선택한 index가 가운데 (ex. 3선택 -> 번호이동 없음. 번호는 12345, 4선택 -> 번호이동 있음. 번호는 23456
- * theme - default 
+ * theme - auto, default
+ * <br/>
+ * auto: 선택한 번호가 전체 버튼의 중간이상이고, 마지막 버튼의 중
+ * 
  */
 const Pagination = ({
   theme = 'auto',
@@ -27,30 +30,45 @@ const Pagination = ({
   currentPage,
   totalPost,
   setCurrentPage,
-  ...props
+  className
 }: paginationType) => {
   const [currentBtn, setCurrentBtn] = useState(currentPage); // 현재 선택한 버튼 - 사용중
   const [array, setArray] = useState<number[]>([]); // auto일때 사용.
 
-  const btnREnderRange = Math.ceil(totalPost / pageRange); // 맨마지막 버튼 
+  const btnRenderRange = Math.ceil(totalPost / pageRange); // 맨마지막 버튼 
   const [renderButton, setRenderButton] = useState<number>(btnRange); // 한 그룹당 보여줄 버튼 갯수
   const btnGroupIndex = Math.ceil(currentBtn / btnRange); // 그룹 인덱스 번호
-  const startPage = (btnGroupIndex - 1) * btnRange + 1; // 버튼 배열중 시작하는 버튼 숫자
+  // const startPage = (btnGroupIndex - 1) * btnRange + 1; // 버튼 배열중 시작하는 버튼 숫자
+  const [startPage, setStartPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (theme !== 'auto') {
+      setStartPage((btnGroupIndex - 1) * btnRange + 1)
+    }
+  }, [btnGroupIndex, btnRange])
 
   // 그룹이 바뀔때 남는 갯수만큼 버튼 보여주기
   useEffect(() => {
     // 1그룹이 안될경우
-    if (btnRange * pageRange > totalPost) {
-      const calc = Math.ceil(totalPost / pageRange);
-      setRenderButton(calc);
-      // 2그룹이상인 경우 남는 버튼만 보여주기
-    } else {
-      setRenderButton(btnRange)
-      // 마지막 그룹일때 : 올림(맨마지막 버튼 11 / 버튼 범위 10)  === 그룹 인덱스 2
-      if (Math.ceil(currentBtn / btnRange) === Math.ceil(btnREnderRange / pageRange)) {
-        const residue = Math.ceil((totalPost - (btnRange * pageRange)) / pageRange)
-        const calcresidue = residue > 10 ? residue - 10 : residue
-        setRenderButton(calcresidue);
+    if (theme !== 'auto') {
+      if (btnRange * pageRange > totalPost) {
+        const calc = Math.ceil(totalPost / pageRange);
+        setRenderButton(calc);
+        // 2그룹이상인 경우 남는 버튼만 보여주기
+      } else {
+        setRenderButton(btnRange)
+        // 마지막 그룹일때 : 올림(맨마지막 버튼 11 / 버튼 범위 10)  === 그룹 인덱스 2
+        // console.log(`
+        //   현재 버튼 ${currentBtn} 버튼 범위${btnRange}
+        //   맨끝버튼 ${btnRenderRange} 페이지범위 ${pageRange}
+        //   그룹인덱스 번호 ${Math.ceil(currentBtn / btnRange)}
+        //   맨마지막버튼이 속한 그룹인덱스 번호 ${Math.ceil(btnRenderRange / btnRange)}
+        //   `)
+        if (Math.ceil(currentBtn / btnRange) === Math.ceil(btnRenderRange / btnRange)) {
+          const residue = Math.ceil((totalPost - (btnRange * pageRange)) / pageRange)
+          const calcresidue = residue > btnRange ? residue - btnRange : residue
+          setRenderButton(calcresidue);
+        }
       }
     }
   }, [totalPost, btnGroupIndex])
@@ -59,9 +77,21 @@ const Pagination = ({
   useEffect(() => {
     setCurrentPage(currentBtn);
     // theme가 auto인 경우
-    // auto이고 5개일때, 선택한 버튼이 3 > 2.5, 2 > 2.5
-    if (theme === 'auto' && currentBtn > btnRange / 2) {
-      console.log('1씩 올리기');
+    // auto 일때
+    if (theme === 'auto') {
+      // 선택한 값이 3이상 maxbtn의 - 2일때
+      if (Math.ceil(btnRange / 2) < currentBtn && currentBtn <= btnRenderRange - Math.floor(btnRenderRange / btnRange)) {
+        if (currentBtn > currentPage) {
+          setStartPage(prev => prev + 1)
+        }
+        if (currentBtn < currentPage) {
+          setStartPage(prev => prev - 1)
+        }
+      }
+      // 선택한 값이 1, 2 일때
+      if (Math.ceil(btnRange / 2) >= currentBtn) {
+        setStartPage(1);
+      }
     }
   }, [currentBtn])
 
@@ -73,7 +103,7 @@ const Pagination = ({
     return (<Button onClick={() => setCurrentBtn(1)}>{'<<'}</Button>)
   }
   const EndButton = () => {
-    return (<Button onClick={() => setCurrentBtn(btnREnderRange)}>{'>>'}</Button>)
+    return (<Button onClick={() => setCurrentBtn(btnRenderRange)}>{'>>'}</Button>)
   }
   const PrevButton = () => {
     return (<Button onClick={() => setCurrentBtn(prev => prev - 1)}>{'<'}</Button>)
@@ -86,7 +116,7 @@ const Pagination = ({
     <>
       <div className={s.pagination}>
         {
-          currentBtn > 1 &&
+          isButton && currentBtn > 1 &&
           <>
             <StartButton />
             <PrevButton />
@@ -94,7 +124,7 @@ const Pagination = ({
         }
         <div>
           {Array(renderButton)
-            .fill(theme === 'default' ? startPage : startPage) // 이부분?
+            .fill(startPage) // 이부분?
             .map((_, index) => {
               return (
                 <Button
@@ -111,7 +141,7 @@ const Pagination = ({
             })}
         </div>
         {
-          btnREnderRange !== currentBtn && <>
+          isButton && btnRenderRange !== currentBtn && <>
             <NextButton />
             <EndButton />
           </>
@@ -129,5 +159,5 @@ export type { paginationType }
 //   ${startPage + btnRange - 1}
 //   버튼 범위 ${btnRange}
 //   렌더버튼 ${renderButton}
-//   맨마지막 버튼 ${btnREnderRange}
+//   맨마지막 버튼 ${btnRenderRange}
 //   ` )

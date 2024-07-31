@@ -26,7 +26,6 @@ export const NoPagingApi: Story = {
 
     // 1. 페이징 처리가 안되어있는 api 일 경우
     useEffect(() => {
-      console.log('dindex', index);
       axios
         .get('https://jsonplaceholder.typicode.com/todos')
         .then((res) => {
@@ -36,11 +35,9 @@ export const NoPagingApi: Story = {
         })
     }, [index]);
 
-    console.log('데이터', post);
-
     return (
       <>
-        <Pagination theme="auto" totalPost={202} setCurrentPage={setIndex} currentPage={index} btnRange={5} />
+        <Pagination theme="auto" totalPost={112} setCurrentPage={setIndex} currentPage={index} btnRange={5} />
       </>
     )
   }
@@ -65,7 +62,7 @@ export const PagingApi: Story = {
 
     return (
       <>
-        <Pagination theme="default" totalPost={172} setCurrentPage={setIndex} currentPage={index} btnRange={10} />
+        <Pagination theme="default" totalPost={112} setCurrentPage={setIndex} currentPage={index} btnRange={10} />
       </>
     )
   }
