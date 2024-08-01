@@ -33,13 +33,11 @@ const Pagination = ({
   className
 }: paginationType) => {
   const [currentBtn, setCurrentBtn] = useState(currentPage); // 현재 선택한 버튼 - 사용중
-  const [array, setArray] = useState<number[]>([]); // auto일때 사용.
 
-  const btnRenderRange = Math.ceil(totalPost / pageRange); // 맨마지막 버튼 
+  const EndBtnNumber = Math.ceil(totalPost / pageRange); // 맨마지막 버튼 
   const [renderButton, setRenderButton] = useState<number>(btnRange); // 한 그룹당 보여줄 버튼 갯수
   const btnGroupIndex = Math.ceil(currentBtn / btnRange); // 그룹 인덱스 번호
-  // const startPage = (btnGroupIndex - 1) * btnRange + 1; // 버튼 배열중 시작하는 버튼 숫자
-  const [startPage, setStartPage] = useState<number>(1);
+  const [startPage, setStartPage] = useState<number>(1); // 시작버튼
 
   useEffect(() => {
     if (theme !== 'auto') {
@@ -58,15 +56,11 @@ const Pagination = ({
       } else {
         setRenderButton(btnRange)
         // 마지막 그룹일때 : 올림(맨마지막 버튼 11 / 버튼 범위 10)  === 그룹 인덱스 2
-        // console.log(`
-        //   현재 버튼 ${currentBtn} 버튼 범위${btnRange}
-        //   맨끝버튼 ${btnRenderRange} 페이지범위 ${pageRange}
-        //   그룹인덱스 번호 ${Math.ceil(currentBtn / btnRange)}
-        //   맨마지막버튼이 속한 그룹인덱스 번호 ${Math.ceil(btnRenderRange / btnRange)}
-        //   `)
-        if (Math.ceil(currentBtn / btnRange) === Math.ceil(btnRenderRange / btnRange)) {
+        if (Math.ceil(currentBtn / btnRange) === Math.ceil(EndBtnNumber / btnRange)) {
+
           const residue = Math.ceil((totalPost - (btnRange * pageRange)) / pageRange)
           const calcresidue = residue > btnRange ? residue - btnRange : residue
+
           setRenderButton(calcresidue);
         }
       }
@@ -79,18 +73,21 @@ const Pagination = ({
     // theme가 auto인 경우
     // auto 일때
     if (theme === 'auto') {
-      // 선택한 값이 3이상 maxbtn의 - 2일때
-      if (Math.ceil(btnRange / 2) < currentBtn && currentBtn <= btnRenderRange - Math.floor(btnRenderRange / btnRange)) {
-        if (currentBtn > currentPage) {
-          setStartPage(prev => prev + 1)
-        }
-        if (currentBtn < currentPage) {
-          setStartPage(prev => prev - 1)
-        }
+      // 시작버튼값이 변경되는 영역일때(범위 안) - 선택한 값이 3이상 maxbtn의 - 2일때
+      if (Math.ceil(btnRange / 2) < currentBtn && currentBtn <= EndBtnNumber - Math.ceil(EndBtnNumber / btnRange)) {
+        setStartPage(currentBtn - Math.round(btnRange / 2) + 1)
       }
-      // 선택한 값이 1, 2 일때
+      // 시작 영역일때(범위 앞)
       if (Math.ceil(btnRange / 2) >= currentBtn) {
         setStartPage(1);
+      }
+      // 끝 영역일때(범위 뒤)
+      if (Math.ceil(btnRange / 2) < currentBtn && currentBtn > EndBtnNumber - Math.ceil(btnRange / 2)) {
+        setStartPage(currentBtn - Math.ceil(btnRange / 2))
+      }
+      // 맨끝일때
+      if (currentBtn === EndBtnNumber) {
+        setStartPage(EndBtnNumber - btnRange + 1)
       }
     }
   }, [currentBtn])
@@ -103,7 +100,7 @@ const Pagination = ({
     return (<Button onClick={() => setCurrentBtn(1)}>{'<<'}</Button>)
   }
   const EndButton = () => {
-    return (<Button onClick={() => setCurrentBtn(btnRenderRange)}>{'>>'}</Button>)
+    return (<Button onClick={() => setCurrentBtn(EndBtnNumber)}>{'>>'}</Button>)
   }
   const PrevButton = () => {
     return (<Button onClick={() => setCurrentBtn(prev => prev - 1)}>{'<'}</Button>)
@@ -124,7 +121,7 @@ const Pagination = ({
         }
         <div>
           {Array(renderButton)
-            .fill(startPage) // 이부분?
+            .fill(startPage)
             .map((_, index) => {
               return (
                 <Button
@@ -141,7 +138,7 @@ const Pagination = ({
             })}
         </div>
         {
-          isButton && btnRenderRange !== currentBtn && <>
+          isButton && EndBtnNumber !== currentBtn && <>
             <NextButton />
             <EndButton />
           </>
@@ -155,9 +152,9 @@ export default Pagination;
 export type { paginationType }
 
 // 확인용 주석
-// console.log(`현재 페이지수 ${currentBtn} 그룹 ${btnGroupIndex}
+// console.log(`현재 페이지수 ${ currentBtn } 그룹 ${ btnGroupIndex }
 //   ${startPage + btnRange - 1}
 //   버튼 범위 ${btnRange}
 //   렌더버튼 ${renderButton}
-//   맨마지막 버튼 ${btnRenderRange}
+//   맨마지막 버튼 ${EndBtnNumber}
 //   ` )
