@@ -1,0 +1,18 @@
+.counter {
+  display: flex;
+
+  button {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+
+  input {
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    pointer-events: none;
+  }
+}

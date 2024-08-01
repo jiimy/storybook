@@ -79,8 +79,8 @@ import 'snow-white-ui/build/styles/global.scss'; // npm에 포함된 스타일�
 - dropdown [o]
 - switch [△]
 - sheet [o]
-- counter ui []
-- pagination [△]
+- counter ui [o]
+- pagination [o]
 
 #### 개발자 컨트롤
 - snackbar []
@@ -88,7 +88,7 @@ import 'snow-white-ui/build/styles/global.scss'; // npm에 포함된 스타일�
 - timer progress [△]
 - tooltip [o]
 
-#### 사용자 입력
+#### 사용자 입력/form
 - form/input [△]
 - form/textara [△]
 
@@ -98,7 +98,7 @@ import 'snow-white-ui/build/styles/global.scss'; // npm에 포함된 스타일�
 - uiToolkit []
   - 편집모드, colorpicker 등 qa나 마케팅쪽에서 화면 테스트를 위한 툴.
 
-### 조합으로 이루어진 컴포넌트 (추후)
+### 조합으로 완성되는 컴포넌트 (추후)
 - 사이드바
 - 헤더
 - 푸터
