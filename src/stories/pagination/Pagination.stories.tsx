@@ -17,7 +17,51 @@ const meta: Meta<typeof Pagination> = {
 export default meta;
 type Story = StoryObj<typeof Pagination>;
 
+export const PagingApi: Story = {
+  args: {
+    isButton: true,
+    theme: 'default',
+    className: '',
+    btnRange: 10,
+    pageRange: 10,
+    totalPost: 112
+  },
+  render: function Render(args) {
+
+    const [post, setPosts] = useState([]); // 넘겨줄 데이터의 length
+    const [index, setIndex] = useState(1);
+
+    const viewPageCount = 10;
+
+    // 1. 페이징 처리가 안되어있는 api 일 경우
+    useEffect(() => {
+      // console.log('dindex', index);
+      axios
+        .get(`https://jsonplaceholder.typicode.com/photos?_page=${index}&_limit=${viewPageCount}`)
+        .then((res) => {
+          setPosts(res.data);
+          console.log('data:', res.data)
+        })
+    }, [index]);
+
+
+    return (
+      <>
+        <Pagination theme={args.theme} totalPost={args.totalPost} setCurrentPage={setIndex} currentPage={index} btnRange={10} />
+      </>
+    )
+  }
+}
+
 export const NoPagingApi: Story = {
+  args: {
+    isButton: true,
+    theme: 'auto',
+    className: '',
+    btnRange: 10,
+    pageRange: 10,
+    totalPost: 112
+  },
   render: function Render(args) {
     const [post, setPosts] = useState([]); // 넘겨줄 데이터의 length
     const [index, setIndex] = useState(1);
@@ -37,33 +81,9 @@ export const NoPagingApi: Story = {
 
     return (
       <>
-        <Pagination theme="auto" totalPost={112} setCurrentPage={setIndex} currentPage={index} btnRange={5} />
+        <Pagination theme={args.theme} totalPost={args.totalPost} setCurrentPage={setIndex} currentPage={index} btnRange={args.btnRange} />
       </>
     )
   }
 }
 
-export const PagingApi: Story = {
-  render: function Render(args) {
-
-    const [post, setPosts] = useState([]); // 넘겨줄 데이터의 length
-    const [index, setIndex] = useState(1);
-
-    const viewPageCount = 10;
-
-    // 1. 페이징 처리가 안되어있는 api 일 경우
-    useEffect(() => {
-      // console.log('dindex', index);
-      axios
-        .get(`https://jsonplaceholder.typicode.com/photos?_page=${index}&_limit=${viewPageCount}`)
-        .then((res) => console.log('dd', res.data))
-    }, [index]);
-
-
-    return (
-      <>
-        <Pagination theme="default" totalPost={112} setCurrentPage={setIndex} currentPage={index} btnRange={10} />
-      </>
-    )
-  }
-}

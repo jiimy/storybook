@@ -19,8 +19,10 @@ type paginationType = {
 /**
  * theme - auto, default
  * <br/>
- * auto: 선택한 번호가 전체 버튼의 중간이상이고, 마지막 버튼의 중
- * 
+ * <br/>
+ * auto: 자동으로 선택한 버튼이 가운데에 위치
+ * <br/>
+ * default: 버튼이 이동하지 않고, 컨트롤러를 이용해 다음 그룹으로 이동
  */
 const Pagination = ({
   theme = 'auto',
