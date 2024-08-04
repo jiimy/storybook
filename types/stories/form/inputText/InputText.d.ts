@@ -5,3 +5,4 @@ type InputTextProps = {
 } & HTMLProps<HTMLInputElement>;
 declare const InputText: ({ state, validText, ...attr }: InputTextProps) => import("react/jsx-runtime").JSX.Element;
 export default InputText;
+export type { InputTextProps };

@@ -2,13 +2,7 @@ import type { StoryObj } from "@storybook/react";
 import Sheet from "./Sheet";
 declare const meta: {
     title: string;
-    component: ({ children, isDim, isShow, height, onClose }: {
-        isShow: boolean;
-        onClose: () => void;
-        children?: import("react").ReactNode;
-        isDim?: boolean | undefined;
-        height?: string | undefined;
-    }) => import("react/jsx-runtime").JSX.Element;
+    component: ({ children, isDim, isShow, height, onClose }: import("./Sheet").SheetProps) => import("react/jsx-runtime").JSX.Element;
     tags: string[];
     parameters: {
         layout: string;

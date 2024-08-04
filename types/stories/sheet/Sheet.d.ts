@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-type SheetProps = {
+export type SheetProps = {
     isShow: boolean;
     onClose: () => void;
     children?: ReactNode;
