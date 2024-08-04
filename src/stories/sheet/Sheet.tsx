@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import styled, { css } from 'styled-components';
 import s from './sheet.module.scss';
 
-type SheetProps = {
+export type SheetProps = {
   // isToggle: React.Dispatch<React.SetStateAction<boolean>>;
   isShow: boolean;
   onClose: () => void;

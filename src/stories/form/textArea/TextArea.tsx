@@ -28,3 +28,4 @@ const TextArea = ({ theme = 'default', ...props }: TextAreaProps) => {
 };
 
 export default TextArea;
+export type { TextAreaProps }

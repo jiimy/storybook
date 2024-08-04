@@ -58,7 +58,7 @@ export const NoPagingApi: Story = {
     isButton: true,
     theme: 'auto',
     className: '',
-    btnRange: 10,
+    btnRange: 5,
     pageRange: 10,
     totalPost: 112
   },

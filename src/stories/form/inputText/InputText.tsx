@@ -47,3 +47,4 @@ const InputText = ({ state, validText, ...attr }: InputTextProps) => {
 };
 
 export default InputText;
+export type { InputTextProps }

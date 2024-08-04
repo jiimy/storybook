@@ -103,3 +103,4 @@ import 'snow-white-ui/build/styles/global.scss'; // npm에 포함된 스타일�
 - 헤더
 - 푸터
 - 카드리스트
+- 테이블
