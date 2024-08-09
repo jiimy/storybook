@@ -2,6 +2,8 @@ import React, { HTMLProps } from 'react';
 import s from './textarea.module.scss';
 import { formProps } from '../form';
 
+// NOTE: 참고할것
+// https://yung-developer.tistory.com/109 
 type TextAreaProps = {
   theme?: 'default' | 'auto', // default 는 높이가 정해져있음. auto 는 높이 유동적
   children?: any;
