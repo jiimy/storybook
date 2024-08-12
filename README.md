@@ -39,6 +39,12 @@ export * from './stories/button/Button';
 - npm run build
 - npm publish
 
+## github 에 스토리북 배포
+- npm run deploy
+
+https:깃헙네임.github/io/스토리북레포명 
+으로 배포됨.
+
 ## chromatic 배포
 
 - npm run chromatic
