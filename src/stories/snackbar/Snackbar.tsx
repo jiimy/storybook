@@ -1,17 +1,36 @@
+import { useEffect } from 'react';
+import styled, { css, keyframes } from 'styled-components';
 import s from './snackbar.module.scss';
-import ReactDOM from 'react-dom';
-import styled, { keyframes } from 'styled-components';
-import {
-	SnackbarAction,
-	SnackbarDescription,
-	SnackbarImage,
-} from './SnackbarItem';
-import { useEffect, useState } from 'react';
 
-type SnackbarProps = {
-	open?: boolean;
-	position?: 'tl' | 'tc' | 'tr' | 'bl' | 'bc' | 'br';
-	children?: React.ReactNode | string;
+interface snackbarWrapperProps {
+  position?: 'top-center' | 'bottom-center';
+  children: React.ReactNode;
+}
+interface snackbarItemProps extends snackbarWrapperProps {
+  open?: boolean;
+  timer?: number; // n초뒤 사라짐.
+  onClose: () => void | undefined;
+  isClose?: boolean,
+
+}
+
+const SnackbarWrapperStyle = styled.div<{ position: snackbarWrapperProps['position'] }>`
+  ${(props) => props.position === 'top-center' && css`
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: start;
+  `}
+  ${(props) => props.position === 'bottom-center' && css`
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  `}
+`
+
+export const SnackbarWrapper = ({ children, position = 'bottom-center' }: snackbarWrapperProps) => {
+  return (
+    <SnackbarWrapperStyle position={position} className={s.snackbar}>{children}</SnackbarWrapperStyle>
+  )
 };
 
 const slideInTop = keyframes`
@@ -34,70 +53,45 @@ const slideOutBottom = keyframes`
   to { transform: translateY(20px); opacity: 0; }
 `;
 
-const SnackbarContainer = styled.div<SnackbarProps & { visible: boolean }>`
-	${({ position }) => {
-		switch (position) {
-			case 'tl':
-				return 'top: 20px; left: 20px;';
-			case 'tc':
-				return 'top: 20px; left: 50%;';
-			case 'tr':
-				return 'top: 20px; right: 20px;';
-			case 'bl':
-				return 'bottom: 20px; left: 20px;';
-			case 'bc':
-				return 'bottom: 20px; left: 50%;';
-			case 'br':
-				return 'bottom: 20px; right: 20px;';
-			default:
-				return 'bottom: 20px; left: 50%;';
-		}
-	}}
-	opacity: ${({ visible }) => (visible ? 1 : 0)};
-	animation: ${({ visible, position }) => {
-			if (position?.startsWith('t')) {
-				return visible ? slideInTop : slideOutTop;
-			} else {
-				return visible ? slideInBottom : slideOutBottom;
-			}
-		}}
+const SnackbarStyle = styled.div<snackbarWrapperProps & { open: boolean }>`
+	opacity: ${({ open }) => (open ? 1 : 0)};
+	animation: ${({ open, position }) => {
+    if (position?.includes('top')) {
+      return open ? slideInTop : slideOutTop;
+    } else {
+      return open ? slideInBottom : slideOutBottom;
+    }
+  }}
 		0.3s ease-in-out;
 	transition: opacity 0.3s ease-in-out;
 `;
 
-export const SnackbarRoot = (props: SnackbarProps) => {
-	const { open, position = 'br', children } = props;
-	const [isVisible, setIsVisible] = useState(false);
-	useEffect(() => {
-		if (open) {
-			const showTimer = setTimeout(() => setIsVisible(true), 200);
-			return () => clearTimeout(showTimer);
-		} else {
-			const hideTimer = setTimeout(() => setIsVisible(false), 500);
-			return () => clearTimeout(hideTimer);
-		}
-	}, [open]);
+const Snackbar = ({
+  children,
+  open = false,
+  timer = 0,
+  position = 'bottom-center',
+  isClose = false,
+  onClose
+}: snackbarItemProps) => {
 
-	if (!isVisible) {
-		return null;
-	}
+  useEffect(() => {
+    if (timer !== 0) {
+      const showTimer = setTimeout(() => {
+        onClose()
+      }, timer);
+      return () => clearTimeout(showTimer);
+    }
+  }, [open, timer])
 
-	return ReactDOM.createPortal(
-		<SnackbarContainer
-			className={s.snackbar}
-			position={position}
-			visible={isVisible && open!}
-		>
-			{children}
-		</SnackbarContainer>,
-		document.body,
-	);
+  return (
+    <>
+      <SnackbarStyle className={s.snackbar_item} position={position} open={open}>
+        {children}
+        {isClose && <div className={s.close} onClick={() => onClose()}>닫기</div>}
+      </SnackbarStyle>
+    </>
+  );
 };
-
-const Snackbar = Object.assign(SnackbarRoot, {
-	Image: SnackbarImage,
-	Description: SnackbarDescription,
-	Action: SnackbarAction,
-});
 
 export default Snackbar;
