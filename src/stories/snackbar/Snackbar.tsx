@@ -5,6 +5,7 @@ import s from './snackbar.module.scss';
 interface snackbarWrapperProps {
   position?: 'top-center' | 'bottom-center';
   children: React.ReactNode;
+  className?: string;
 }
 interface snackbarItemProps extends snackbarWrapperProps {
   open?: boolean;
@@ -27,9 +28,9 @@ const SnackbarWrapperStyle = styled.div<{ position: snackbarWrapperProps['positi
   `}
 `
 
-export const SnackbarWrapper = ({ children, position = 'bottom-center' }: snackbarWrapperProps) => {
+export const SnackbarWrapper = ({ children, position = 'bottom-center', className }: snackbarWrapperProps) => {
   return (
-    <SnackbarWrapperStyle position={position} className={s.snackbar}>{children}</SnackbarWrapperStyle>
+    <SnackbarWrapperStyle position={position} className={`${s.snackbar} ${className}`}>{children}</SnackbarWrapperStyle>
   )
 };
 
@@ -72,7 +73,8 @@ const Snackbar = ({
   timer = 0,
   position = 'bottom-center',
   isClose = false,
-  onClose
+  onClose,
+  className
 }: snackbarItemProps) => {
 
   useEffect(() => {
@@ -86,7 +88,7 @@ const Snackbar = ({
 
   return (
     <>
-      <SnackbarStyle className={s.snackbar_item} position={position} open={open}>
+      <SnackbarStyle className={`${s.snackbar_item} ${className}`} position={position} open={open}>
         {children}
         {isClose && <div className={s.close} onClick={() => onClose()}>닫기</div>}
       </SnackbarStyle>
