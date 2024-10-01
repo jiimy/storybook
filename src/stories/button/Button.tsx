@@ -5,12 +5,11 @@ import styled, { css } from 'styled-components';
 type ButtonProps = {
   theme?: 'primary' | 'secondary';
   size?: 'small' | 'medium' | 'large';
-  children: any;
+  children: React.ReactNode;
   full?: boolean;
   className?: string;
   onClick?: () => void;
-}
-
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const ButtonStyle = styled.button<ButtonProps>`
   ${props => props.full && css`
@@ -49,16 +48,17 @@ const Button = ({
   onClick,
   full,
   className,
-  children
+  children,
+  // ...attr
 }: ButtonProps) => {
   return (
     <ButtonStyle
-      type="button"
       theme={theme}
       size={size}
       full={full}
       onClick={onClick}
       className={`${s.button} ${className}`}
+    // {...attr}
     >
       {children}
     </ButtonStyle>
