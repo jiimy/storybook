@@ -17,7 +17,7 @@ const meta: Meta<typeof InputText> = {
 export default meta;
 type Story = StoryObj<typeof InputText>;
 
-export const Basic: Story = {
+export const BasicInputText: Story = {
   args: {
 
   },
