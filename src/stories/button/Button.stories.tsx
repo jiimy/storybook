@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Button from "./Button";
 
 const meta: Meta<typeof Button> = {
-  title: "Component/Form/InputText",
+  title: "Component/Button",
   component: Button,
   parameters: {
     layout: "centered",
@@ -19,12 +19,15 @@ type Story = StoryObj<typeof Button>;
 
 export const BasicButton: Story = {
   args: {
-
+    children: '버튼',
+    theme: 'primary',
+    size: 'medium',
+    onClick: () => alert('버튼 클릭')
   },
   render: function Render(args) {
     return (
       <>
-        <Button type="submit" disabled>{args.children}</Button>
+        <Button type="submit" {...args}>{args.children}</Button>
       </>
     )
   }
