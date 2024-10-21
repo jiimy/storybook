@@ -67,6 +67,9 @@ const Pagination = ({
         }
       }
     }
+    else {
+
+    }
   }, [totalPost, btnGroupIndex])
 
   // 현재 선택한 버튼
@@ -83,9 +86,13 @@ const Pagination = ({
       if (Math.ceil(btnRange / 2) >= currentBtn) {
         setStartPage(1);
       }
-      // 끝 영역일때(범위 뒤)
-      if (Math.ceil(btnRange / 2) < currentBtn && currentBtn > EndBtnNumber - Math.ceil(btnRange / 2)) {
-        setStartPage(currentBtn - Math.ceil(btnRange / 2))
+      // 끝 영역일때(범위 뒤) 
+      // NOTE: 이전 복잡하게 생각했던 로직
+      // if (Math.ceil(btnRange / 2) < currentBtn && currentBtn > EndBtnNumber - Math.ceil(btnRange / 2) + 1) {
+      //   setStartPage(currentBtn - Math.round(btnRange / 2))
+      // }
+      if (EndBtnNumber - renderButton + (renderButton / 2) < currentBtn) {
+        setStartPage(EndBtnNumber - renderButton + 1)
       }
       // 맨끝일때
       if (currentBtn === EndBtnNumber) {
