@@ -109,6 +109,8 @@ import 'snow-white-ui/build/styles/global.scss'; // npm에 포함된 스타일�
 
 #### 기타
 
+- slide []
+  - 23기준 최신이었던 view transitions api - startViewTransition() 을 이용해서 슬라이드 만들기
 - motionlayer []
   - 여러 모션들. framer-motion 처럼 모션 자체를 정의하는 감싸는 용도의 레이어
 - uiToolkit []
