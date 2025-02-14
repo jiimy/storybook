@@ -15,3 +15,5 @@ export type { TagProps } from './stories/tag/Tag';
 
 export { default as Tooltip } from './stories/tooltip/Tooltip';
 export type { TooltipProps } from './stories/tooltip/Tooltip';
+
+export { default as CardItem } from './stories/cardItem/CardItem';
