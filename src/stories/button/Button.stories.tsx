@@ -22,7 +22,7 @@ export const BasicButton: Story = {
     children: '버튼',
     theme: 'primary',
     size: 'medium',
-    onClick: () => alert('버튼 클릭')
+    onClick: () => alert('버튼 클릭'),
   },
   render: function Render(args) {
     return (

@@ -1,9 +1,10 @@
 import React from 'react';
 import s from './button.module.scss';
 import styled, { css } from 'styled-components';
+import classNames from 'classnames';
 
 type ButtonProps = {
-  theme?: 'primary' | 'secondary';
+  theme?: 'primary' | 'secondary' | 'vijob';
   size?: 'small' | 'medium' | 'large';
   children: React.ReactNode;
   full?: boolean;
@@ -15,15 +16,6 @@ const ButtonStyle = styled.button<ButtonProps>`
   ${props => props.full && css`
     width: 100%;
     text-align: center;
-  `}
-
-  ${props => props.theme === 'primary' && css`
-    background: var(--sw-primary-color);
-    color: var(--sw-white);
-  `}
-  ${props => props.theme === 'secondary' && css`
-    background: var(--sw-secondary-color);
-    color: var(--sw-white);
   `}
 
   ${props => props.size === 'small' && css`
@@ -38,10 +30,39 @@ const ButtonStyle = styled.button<ButtonProps>`
     font-size: var(--sw-large-font-size);
     padding: var(--sw-large-padding);
   `}
+
+  ${props => props.theme === 'primary' && css`
+    background: var(--sw-primary-color);
+    color: var(--sw-white);
+  `}
+  ${props => props.theme === 'secondary' && css`
+    background: var(--sw-secondary-color);
+    color: var(--sw-white);
+  `}
+  ${props => props.theme === 'vijob' && css`
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid #d9d9d9;
+    font-size: 16px;
+    color: #0a0a0a;
+    align-items: center;
+    text-align: center;
+    background: white;
+    font-size: 12px;
+    font-weight: 500;
+  `}
+
+
+
+  
 `
 /**
  * 
  */
+
+// 태그에 기본으로 정의되어 있는 theme나 size같은 타입을 줄 수있어야 한다.
+// 그 타입을 자동완성도 시켜주고 props를 전달하기 위해서 css in js를 사용. 
+// 만약 css로 한다면 자동완성도 되지 않고, class명으로만 구분해야한다.
 const Button = ({
   theme = 'primary',
   size = 'medium',
@@ -57,7 +78,8 @@ const Button = ({
       size={size}
       full={full}
       onClick={onClick}
-      className={`${s.button} ${className}`}
+      // className={${s.button}`}
+      className={classNames(s.button, className)}
     // {...attr}
     >
       {children}

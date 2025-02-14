@@ -1,7 +1,26 @@
 $mobile: 768;
 
 @mixin media-mo() {
-  @media (max-width: #{$mobile}px) {
-    @content;
-  }
+	@media (max-width: #{$mobile}px) {
+		@content;
+	}
+}
+
+@mixin dotdotdot($font-size, $lines-to-show, $line-height: 1.5) {
+	display: block;
+	/* Fallback for non-webkit */
+	display: -webkit-box;
+	// box-orient: vertical;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lines-to-show;
+	// display: box;
+	// max-width: 400px;
+	max-width: 100%;
+	// height: $font-size * $line-height * $lines-to-show;
+	/* Fallback for non-webkit */
+	margin: 0 auto;
+	font-size: $font-size;
+	line-height: $line-height;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
