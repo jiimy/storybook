@@ -3,4 +3,4 @@ import InputText from "./InputText";
 declare const meta: Meta<typeof InputText>;
 export default meta;
 type Story = StoryObj<typeof InputText>;
-export declare const Basic: Story;
+export declare const BasicInputText: Story;

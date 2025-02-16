@@ -1,6 +1,6 @@
 {
 	"name": "snow-white-ui",
-	"version": "0.0.51",
+	"version": "0.0.52",
 	"main": "build/index.js",
 	"module": "build/index.es.js",
 	"types": "types/index.d.ts",

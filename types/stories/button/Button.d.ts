@@ -1,14 +1,15 @@
+import React from 'react';
 type ButtonProps = {
-    theme?: 'primary' | 'secondary';
+    theme?: 'primary' | 'secondary' | 'vijob';
     size?: 'small' | 'medium' | 'large';
-    children: any;
+    children: React.ReactNode;
     full?: boolean;
     className?: string;
     onClick?: () => void;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 /**
  *
  */
-declare const Button: ({ theme, size, onClick, full, className, children }: ButtonProps) => import("react/jsx-runtime").JSX.Element;
+declare const Button: ({ theme, size, onClick, full, className, children, }: ButtonProps) => import("react/jsx-runtime").JSX.Element;
 export default Button;
 export type { ButtonProps };
