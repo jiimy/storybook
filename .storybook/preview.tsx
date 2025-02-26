@@ -6,7 +6,7 @@ import '../src/styles/global.scss';
 const preview: Preview = {
   parameters: {
     // actions: { argTypesRegex: "^on.*" },
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    // actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,

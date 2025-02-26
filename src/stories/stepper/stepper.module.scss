@@ -1,0 +1,21 @@
+.stepper {
+	position: relative;
+	span {
+		cursor: pointer;
+	}
+	ul {
+		position: absolute;
+		width: 100%;
+		top: 100%;
+		border: 1px solid black;
+		border-top: none;
+		border-radius: 0 0 10px 10px;
+		background: white;
+		z-index: 1;
+	}
+	li {
+		padding: 0 10px;
+		min-height: 20px;
+		cursor: pointer;
+	}
+}

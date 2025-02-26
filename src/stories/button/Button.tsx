@@ -39,22 +39,6 @@ const ButtonStyle = styled.button<ButtonProps>`
     background: var(--sw-secondary-color);
     color: var(--sw-white);
   `}
-  ${props => props.theme === 'vijob' && css`
-    height: 34px;
-    padding: 0 12px;
-    border: 1px solid #d9d9d9;
-    font-size: 16px;
-    color: #0a0a0a;
-    align-items: center;
-    text-align: center;
-    background: white;
-    font-size: 12px;
-    font-weight: 500;
-  `}
-
-
-
-  
 `
 /**
  * 
