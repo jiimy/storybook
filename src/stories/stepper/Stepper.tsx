@@ -1,39 +1,33 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import s from './stepper.module.scss';
 import StepperItem from './item/StepperItem';
 import styled, { css } from 'styled-components';
+import { group } from 'console';
 
 type stepperUiType = {
   theme?: 'breadcrumb' | 'dropdown'
 }
-type stepperType = {
+type stepperType<T> = {
   children: React.ReactNode;
-  initList: string[];  // 첫번째 단계에서 보여줄 리스트
-  select: string;  // 초기 선택 값
+  initSelect: number; // 초기 선택 값 순서
+  // select: string;
   className?: string;
   groupName: string; // 연관되는 그룹이름. 알아보는 용도
+  initList: T;
 } & stepperUiType
 
 
 type StepperContextType = {
-  value: string;  // 선택된 값
-  select: (value: string) => void;  // 값을 선택하는 함수
-  list: string[];  // 현재 단계에 해당하는 리스트
-  setList: (list: string[]) => void;  // 리스트를 업데이트하는 함수
-  groupName?: string;
+  updateList: any;
+  setUpdateList: (key: string, index: number, arr: unknown[]) => void; // set 함수
+  groupName: string;
+  initSelect: number;
+  // setSelect: () => {}
+  setSelect: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // Context 생성
 const StepperContext = createContext<StepperContextType | undefined>(undefined);
-
-// Context 훅
-export const useStepper = () => {
-  const context = useContext(StepperContext);
-  if (context === undefined) {
-    throw new Error("Counter Context가 없습니다.");
-  }
-  return context;
-}
 
 const StepperStyle = styled.div<stepperUiType>`
   .${s.stepper} {
@@ -49,7 +43,8 @@ const StepperStyle = styled.div<stepperUiType>`
       padding: 0 10px;
       align-items: center;
       justify-content: center;
-      &:is_open {
+
+      &.is_open {
       border-radius: 10px 10px 0 0 ;
       }
     }
@@ -57,25 +52,39 @@ const StepperStyle = styled.div<stepperUiType>`
 `
 
 // Stepper 컴포넌트
-const Stepper = ({ children, className, select, initList, groupName, theme = 'dropdown' }: stepperType) => {
-  const [selected, setSelected] = useState<string>(select || initList[0]);
-  const [list, setList] = useState<string[]>(initList);
-  const [grouptIndex, setGrouptIndex] = useState(0);
+const Stepper = <T extends any>({ children, className, initSelect, theme = 'dropdown', initList, groupName }: stepperType<T>) => {
+  const [select, setSelect] = useState('11');
+  const [updateList, setUpdateList] = useState(initList);
+
+  // 리스트 업데이트 함수
+  const handleUpdateList = (key: string, index: number, arr: unknown[]) => {
+    // setUpdateList(prevState => ({
+    //   ...prevState,
+    //   [key]: { index, arr },
+    // }));
+  };
+  // 저장할 공간 : index, groupname, list
+  // {
+  //   name: groupName, 
+  //   0: {
+  //     ['1-a', '1-b']
+  //   }
+  // }
+  // item에서 변경이 일어날때 groupname이 같다면, index 와 list 추가
+  console.log('DD', initList);
 
   const onSelect = (value: string) => {
-    setSelected(value);
-  };
-
-  // 리스트 업데이트 함수 (각 단계에 맞게 리스트를 업데이트)
-  const updateList = (value: string[]) => {
+    // setSelect(value);
 
   };
+
 
   return (
-    <StepperContext.Provider value={{ value: selected, select: onSelect, list, groupName, setList: updateList }}>
+    // <StepperContext.Provider value={{ value: selected, select: onSelect, setList: updateList }}>
+    <StepperContext.Provider value={{ updateList, setUpdateList: handleUpdateList, groupName, initSelect, setSelect }}>
       <StepperStyle className={`${s.stepper_wrapper} ${className}`} theme={theme}>
-        {React.Children.map(children, (child, index) => {
-          return React.cloneElement(child as React.ReactElement<any>, { index });
+        {React.Children.map(children, (child, childrenIndex) => {
+          return React.cloneElement(child as React.ReactElement<any>, { childrenIndex });
         })}
       </StepperStyle>
     </StepperContext.Provider>
@@ -87,3 +96,11 @@ Stepper.Item = StepperItem;
 
 export default Stepper;
 export type { stepperType };
+
+export const useStepper = () => {
+  const context = useContext(StepperContext);
+  if (context === undefined) {
+    throw new Error("Counter Context가 없습니다.");
+  }
+  return context;
+}
