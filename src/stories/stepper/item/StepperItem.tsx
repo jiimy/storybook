@@ -12,24 +12,25 @@ const StepperItem = ({ childrenIndex, data }: stepperType) => {
   const { updateList, groupName, initSelect, setUpdateList } = useStepper();
   // const keys = updateList[groupName]['arr'].map((item: any) => Object.keys(item)[0])
   const [show, setShow] = useState(false);
+  // const [getData, setGetData] = useState(data || updateList)
   const [li, setLi] = useState<string[]>(); // 렌더링할 list
   const [select, setSelect] = useState('');
-  // const [depth, setDepth] = useState(childrenIndex);
+  const [calcList, setCalclist] = useState<string[]>([]);
+
   useEffect(() => {
-    // 루트 stepper 일때.
-    if (childrenIndex === 0) {
-      setLi(Object.keys(updateList));
-      if (li) {
-        setSelect(li[0]);
-      }
-    } else {
-      // 루트 stpper 가 아닐때.
-      const key = Object.keys(updateList);
-      if (key) {
-        setSelect(key[0])
-      }
-    }
-  }, [])
+    // setLi(Object.keys(data) || Object.keys(updateList))
+    // console.log('cc', Object.keys(data) || Object.keys(updateList))
+    console.log('cc', Object.keys(updateList))
+    console.log('cc1', Object.keys(data))
+    // if (childrenIndex === 0) {
+    //   if (li) {
+    //   }
+    // }
+    // 임시. 루트 stpper 가 아닐때. 
+    // if (childrenIndex === 1) {
+    //   setLi(['11', '22'])
+    // }
+  }, [data, updateList])
 
   const getRecursiveValue = (data: any, childrenIndex: number, currentDepth: number = 0): any => {
     if (Array.isArray(data)) {
@@ -68,17 +69,23 @@ const StepperItem = ({ childrenIndex, data }: stepperType) => {
     return [];  // 해당 key가 없으면 빈 배열 반환
   };
 
-  const onSelect = (value: string) => {
+  const onSelect = (value: string, index?: number) => {
     // setSelect(value);
     // console.log('value: ', value)
     console.log('value: ', getValuesByKey2(value))
-    if (childrenIndex) {
-      setUpdateList(groupName, childrenIndex, getValuesByKey2(value))
-    }
+    // if (childrenIndex) {
+    //   setUpdateList(groupName, childrenIndex, getValuesByKey2(value))
+    // }
     // NOTE: 한번에 전체 데이터 가욜때
-    if (!data) {
+    if (!data) { }
 
+    if (childrenIndex !== 0) {
+      if (index) {
+        // setSelect(clacList[index])
+        // setLi(Object.keys(updateList[clacList[index]]))
+      }
     }
+
 
     // 받은 데이터가 있다면 받은 데이터 안에서 key value 추출.
   }
@@ -100,7 +107,7 @@ const StepperItem = ({ childrenIndex, data }: stepperType) => {
         <ul>
           {
             li?.map((item: string, index: number) => (
-              <li key={index} onClick={() => onSelect(item)}>{item}</li>
+              <li key={index} onClick={() => onSelect(item, index)}>{item}</li>
             ))
           }
         </ul>
