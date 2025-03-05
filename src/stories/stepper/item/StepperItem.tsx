@@ -8,106 +8,69 @@ type stepperType = {
   data?: any
 }
 
-const StepperItem = ({ childrenIndex, data }: stepperType) => {
-  const { updateList, groupName, initSelect, setUpdateList } = useStepper();
-  // const keys = updateList[groupName]['arr'].map((item: any) => Object.keys(item)[0])
+const StepperItem = ({ childrenIndex = 0, data }: stepperType) => {
+  const { updateList, groupName, initSelect, setUpdateList, selectedKeys, setSelectedKeys } = useStepper();
   const [show, setShow] = useState(false);
-  // const [getData, setGetData] = useState(data || updateList)
-  const [li, setLi] = useState<string[]>(); // 렌더링할 list
-  const [select, setSelect] = useState('');
-  const [calcList, setCalclist] = useState<string[]>([]);
+
+  const [subItems, setSubItems] = useState<string[]>([]); // 현재 단계의 하위 항목들
+  const [selectedKey, setSelectedKey] = useState<string>(selectedKeys[childrenIndex] || ''); // 선택된 키
 
   useEffect(() => {
-    // setLi(Object.keys(data) || Object.keys(updateList))
-    // console.log('cc', Object.keys(data) || Object.keys(updateList))
-    console.log('cc', Object.keys(updateList))
-    console.log('cc1', Object.keys(data))
-    // if (childrenIndex === 0) {
-    //   if (li) {
-    //   }
-    // }
-    // 임시. 루트 stpper 가 아닐때. 
-    // if (childrenIndex === 1) {
-    //   setLi(['11', '22'])
-    // }
-  }, [data, updateList])
+    let tempData = data;
+    let currentDepth = 0;
 
-  const getRecursiveValue = (data: any, childrenIndex: number, currentDepth: number = 0): any => {
-    if (Array.isArray(data)) {
-      if (currentDepth === childrenIndex) {
-        return data;
+    // childrenIndex에 맞는 데이터를 탐색
+    while (currentDepth < childrenIndex) {
+      const selectedKey = selectedKeys[currentDepth];
+      if (selectedKey && tempData[selectedKey]) {
+        tempData = tempData[selectedKey];
       } else {
-        return data.flatMap(item => getRecursiveValue(Object.values(item)[0], childrenIndex, currentDepth + 1));
+        break;
       }
+      currentDepth++;
     }
-    if (typeof data === 'object') {
-      return Object.keys(data).flatMap(key =>
-        getRecursiveValue(data[key], childrenIndex, currentDepth)
-      );
+
+    // 탐색된 data의 하위 항목을 설정
+    if (Array.isArray(tempData)) {
+      // 배열인 경우 첫 번째 객체의 키들을 가져옴
+      setSubItems(Object.keys(tempData[0]));
+    } else if (typeof tempData === 'object') {
+      // 객체인 경우 키들을 가져옴
+      setSubItems(Object.keys(tempData));
     }
-    return [];
+  }, [data, childrenIndex, selectedKeys]); // data나 childrenIndex가 바뀔 때마다 실행
+
+  const handleKeyChange = (key: string) => {
+    setSelectedKey(key);
+    // setSubItems([]); // 하위 항목들을 초기화
+    setSelectedKeys(prev => {
+      const newKeys = [...prev];
+      newKeys[childrenIndex] = key;
+      return newKeys;
+    });
   };
 
-  const getFilteredValue = (childrenIndex: number) => {
-    const groupData = updateList;
-    return getRecursiveValue(groupData, childrenIndex);
-  };
+  useEffect(() => {
+    console.log('cc1 : ', selectedKey, subItems, selectedKeys)
+  }, [selectedKey, subItems, selectedKeys])
 
+  const previousSelectedKey = childrenIndex > 0 ? selectedKeys[childrenIndex - 1] : undefined;
 
-  if (childrenIndex) {
-    const filteredValue = getFilteredValue(childrenIndex);
-    console.log('chi : ', childrenIndex, filteredValue);
-  }
-
-  const getValuesByKey2 = (key: string) => {
-    // updateList 배열을 순회하면서, key에 해당하는 값을 찾아서 반환
-    for (let item of updateList[groupName]['arr'] as any) {
-      if (item[key]) {
-        return Object.keys(item[key]);  // 해당 key의 첫 번째 depth인 '0-a', '0-b' 등을 반환
-      }
-    }
-    return [];  // 해당 key가 없으면 빈 배열 반환
-  };
-
-  const onSelect = (value: string, index?: number) => {
-    // setSelect(value);
-    // console.log('value: ', value)
-    console.log('value: ', getValuesByKey2(value))
-    // if (childrenIndex) {
-    //   setUpdateList(groupName, childrenIndex, getValuesByKey2(value))
-    // }
-    // NOTE: 한번에 전체 데이터 가욜때
-    if (!data) { }
-
-    if (childrenIndex !== 0) {
-      if (index) {
-        // setSelect(clacList[index])
-        // setLi(Object.keys(updateList[clacList[index]]))
-      }
-    }
-
-
-    // 받은 데이터가 있다면 받은 데이터 안에서 key value 추출.
-  }
-  // console.log('name: ', childrenIndex, updateList, groupName, initSelect)
-  // console.log('list: ', updateList)
-
-  // const initText = updateList[groupName]['arr']
-
-
-  // console.log('init : ', Object.keys(updateList[groupName]['arr']))
+  useEffect(() => {
+    console.log('chi: ', previousSelectedKey, childrenIndex);
+    setSelectedKey(subItems[0]);
+  }, [previousSelectedKey, childrenIndex, subItems])
 
   return (
     <div className={classNames([s.stepper], {
-      'is_open': show
+      'is_open': !show
     })}>
-      {/* <span onClick={() => setShow(!show)}>초기값? 몇번째야? {childrenIndex} 번째 </span> */}
-      <span onClick={() => setShow(!show)}>{li && li[0]} / {childrenIndex} 번째 </span>
+      <span onClick={() => setShow(!show)}>{selectedKey || subItems[0]} / {childrenIndex} 번째 </span>
       {show &&
         <ul>
           {
-            li?.map((item: string, index: number) => (
-              <li key={index} onClick={() => onSelect(item, index)}>{item}</li>
+            subItems?.map((item: string, index: number) => (
+              <li key={index} onClick={() => handleKeyChange(item)}>{item}</li>
             ))
           }
         </ul>

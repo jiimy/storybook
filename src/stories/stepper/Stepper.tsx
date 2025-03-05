@@ -22,8 +22,9 @@ type StepperContextType = {
   setUpdateList: (key: string, index: number, arr: unknown[]) => void; // set 함수
   groupName: string;
   initSelect: number;
-  // setSelect: () => {}
   setSelect: React.Dispatch<React.SetStateAction<string>>;
+  selectedKeys: string[];
+  setSelectedKeys: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // Context 생성
@@ -56,6 +57,20 @@ const Stepper = <T extends any>({ children, className, initSelect, theme = 'drop
   const [select, setSelect] = useState('11');
   const [updateList, setUpdateList] = useState(initList);
 
+  // 초기값 설정 함수
+  const initializeSelectedKeys = (list: any, depth: number): string[] => {
+    const keys: string[] = [];
+    let currentData = list;
+    for (let i = 0; i <= depth; i++) {
+      const key = Object.keys(currentData)[0];
+      keys.push(key);
+      currentData = currentData[key];
+    }
+    return keys;
+  };
+
+  const [selectedKeys, setSelectedKeys] = useState<string[]>(initializeSelectedKeys(initList, initSelect));
+
   // 리스트 업데이트 함수
   const handleUpdateList = (key: string, index: number, arr: unknown[]) => {
     // setUpdateList(prevState => ({
@@ -63,28 +78,16 @@ const Stepper = <T extends any>({ children, className, initSelect, theme = 'drop
     //   [key]: { index, arr },
     // }));
   };
-  // 저장할 공간 : index, groupname, list
-  // {
-  //   name: groupName, 
-  //   0: {
-  //     ['1-a', '1-b']
-  //   }
-  // }
-  // item에서 변경이 일어날때 groupname이 같다면, index 와 list 추가
-  console.log('DD', initList);
 
   const onSelect = (value: string) => {
     // setSelect(value);
-
   };
 
-
   return (
-    // <StepperContext.Provider value={{ value: selected, select: onSelect, setList: updateList }}>
-    <StepperContext.Provider value={{ updateList, setUpdateList: handleUpdateList, groupName, initSelect, setSelect }}>
+    <StepperContext.Provider value={{ updateList, setUpdateList: handleUpdateList, groupName, initSelect, setSelect, selectedKeys, setSelectedKeys }}>
       <StepperStyle className={`${s.stepper_wrapper} ${className}`} theme={theme}>
         {React.Children.map(children, (child, childrenIndex) => {
-          return React.cloneElement(child as React.ReactElement<any>, { childrenIndex });
+          return React.cloneElement(child as React.ReactElement<any>, { childrenIndex, data: initList });
         })}
       </StepperStyle>
     </StepperContext.Provider>
@@ -97,7 +100,7 @@ Stepper.Item = StepperItem;
 export default Stepper;
 export type { stepperType };
 
-export const useStepper = () => {
+export const useStepper = (): StepperContextType => {
   const context = useContext(StepperContext);
   if (context === undefined) {
     throw new Error("Counter Context가 없습니다.");
