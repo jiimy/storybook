@@ -37,12 +37,15 @@ const StepperItem = ({ childrenIndex = 0, data }: stepperType) => {
     } else if (typeof tempData === 'object') {
       // 객체인 경우 키들을 가져옴
       setSubItems(Object.keys(tempData));
+    } else if (Array.isArray(tempData)) {
+      // 마지막 depth의 배열인 경우
+      setSubItems(tempData);
     }
   }, [data, childrenIndex, selectedKeys]); // data나 childrenIndex가 바뀔 때마다 실행
 
   const handleKeyChange = (key: string) => {
     setSelectedKey(key);
-    // setSubItems([]); // 하위 항목들을 초기화
+    setSubItems([]); // 하위 항목들을 초기화
     setSelectedKeys(prev => {
       const newKeys = [...prev];
       newKeys[childrenIndex] = key;

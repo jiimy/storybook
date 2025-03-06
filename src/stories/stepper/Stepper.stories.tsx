@@ -33,6 +33,7 @@ export const BasicButton: Story = {
           {/* data는 옵션, api도 옵션으로 넣을수있게 하기 */}
           <Stepper.Item />
           <Stepper.Item />
+          <Stepper.Item />
         </Stepper>
 
         <br /><br /><br /><br />
