@@ -11,6 +11,7 @@ type stepperType = {
 const StepperItem = ({ childrenIndex = 0, data }: stepperType) => {
   const { updateList, groupName, initSelect, setUpdateList, selectedKeys, setSelectedKeys } = useStepper();
   const [show, setShow] = useState(false);
+  // TODO: 내부 select 변경용이 필요함
 
   const [subItems, setSubItems] = useState<string[]>([]); // 현재 단계의 하위 항목들
   const [selectedKey, setSelectedKey] = useState<string>(selectedKeys[childrenIndex] || ''); // 선택된 키
@@ -36,10 +37,8 @@ const StepperItem = ({ childrenIndex = 0, data }: stepperType) => {
       setSubItems(Object.keys(tempData[0]));
     } else if (typeof tempData === 'object') {
       // 객체인 경우 키들을 가져옴
+      console.log('object: ', tempData);
       setSubItems(Object.keys(tempData));
-    } else if (Array.isArray(tempData)) {
-      // 마지막 depth의 배열인 경우
-      setSubItems(tempData);
     }
   }, [data, childrenIndex, selectedKeys]); // data나 childrenIndex가 바뀔 때마다 실행
 
@@ -59,16 +58,16 @@ const StepperItem = ({ childrenIndex = 0, data }: stepperType) => {
 
   const previousSelectedKey = childrenIndex > 0 ? selectedKeys[childrenIndex - 1] : undefined;
 
-  useEffect(() => {
-    console.log('chi: ', previousSelectedKey, childrenIndex);
-    setSelectedKey(subItems[0]);
-  }, [previousSelectedKey, childrenIndex, subItems])
+  // useEffect(() => {
+  //   console.log('chi: ', previousSelectedKey, childrenIndex);
+  //   setSelectedKey(subItems[0]);
+  // }, [previousSelectedKey, childrenIndex, subItems])
 
   return (
     <div className={classNames([s.stepper], {
       'is_open': !show
     })}>
-      <span onClick={() => setShow(!show)}>{selectedKey || subItems[0]} / {childrenIndex} 번째 </span>
+      <span onClick={() => setShow(!show)}>{subItems[0] || selectedKey} / {childrenIndex} 번째 </span>
       {show &&
         <ul>
           {
