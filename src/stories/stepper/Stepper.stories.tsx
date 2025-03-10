@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Stepper from "./Stepper";
+import Stepper2 from "./Stepper2";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { data } from "./mockupData";
 
-const meta: Meta<typeof Stepper> = {
-  title: "Component/Stepper",
-  component: Stepper,
+const meta: Meta<typeof Stepper2> = {
+  title: "Component/Stepper2",
+  component: Stepper2,
   parameters: {
     layout: "centered",
   },
@@ -33,7 +34,7 @@ export const BasicButton: Story = {
           {/* data는 옵션, api도 옵션으로 넣을수있게 하기 */}
           <Stepper.Item />
           <Stepper.Item />
-          <Stepper.Item />
+          {/* <Stepper.Item /> */}
         </Stepper>
 
         <br /><br /><br /><br />
@@ -48,32 +49,23 @@ export const BasicButton: Story = {
 }
 
 
+export const Stepper2Ui: Story = {
+  args: {
+  },
+  render: function Render(args) {
+    const [sendText, setSendText] = useState<string[]>([]);
+    console.log('선택된 텍스트', sendText);
 
-// export const Primary: Story = {
-//   args: {
-//     theme: "primary",
-//     children: "Button",
-//     onClick: () => alert('dd')
-//   },
-// };
+    return (
+      <>
+        처음부터 다 보여주기
+        <Stepper2 initData={data} selected={setSendText} nsxtSelect />
 
-// export const Secondary: Story = {
-//   args: {
-//     theme: "secondary",
-//     children: "Button",
-//   },
-// };
+        <br />
 
-// export const Large: Story = {
-//   args: {
-//     size: "large",
-//     children: "Button",
-//   },
-// };
-
-// export const Small: Story = {
-//   args: {
-//     size: "small",
-//     children: "Button",
-//   },
-// };
+        부분적으로 단계에 따라 보여주기
+        <Stepper2 initData={data} selected={setSendText} />
+      </>
+    )
+  }
+}

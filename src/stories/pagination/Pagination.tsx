@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Button from '../button/Button';
 import s from './pagination.module.scss';
 import styled from 'styled-components';
@@ -41,14 +41,14 @@ const Pagination = ({
   const btnGroupIndex = Math.ceil(currentBtn / btnRange); // 그룹 인덱스 번호
   const [startPage, setStartPage] = useState<number>(1); // 시작버튼
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (theme !== 'auto') {
       setStartPage((btnGroupIndex - 1) * btnRange + 1)
     }
   }, [btnGroupIndex, btnRange])
 
   // 그룹이 바뀔때 남는 갯수만큼 버튼 보여주기
-  useEffect(() => {
+  useLayoutEffect(() => {
     // 1그룹이 안될경우
     if (theme !== 'auto') {
       if (btnRange * pageRange > totalPost) {
@@ -73,7 +73,7 @@ const Pagination = ({
   }, [totalPost, btnGroupIndex])
 
   // 현재 선택한 버튼
-  useEffect(() => {
+  useLayoutEffect(() => {
     setCurrentPage(currentBtn);
     // theme가 auto인 경우
     // auto 일때

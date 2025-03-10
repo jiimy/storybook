@@ -58,10 +58,10 @@ const StepperItem = ({ childrenIndex = 0, data }: stepperType) => {
 
   const previousSelectedKey = childrenIndex > 0 ? selectedKeys[childrenIndex - 1] : undefined;
 
-  // useEffect(() => {
-  //   console.log('chi: ', previousSelectedKey, childrenIndex);
-  //   setSelectedKey(subItems[0]);
-  // }, [previousSelectedKey, childrenIndex, subItems])
+  useEffect(() => {
+    console.log('chi: ', previousSelectedKey, childrenIndex);
+    setSelectedKey(subItems[0]);
+  }, [previousSelectedKey, childrenIndex, subItems])
 
   return (
     <div className={classNames([s.stepper], {
