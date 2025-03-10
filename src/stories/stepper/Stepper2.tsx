@@ -10,7 +10,6 @@ type stepperType = {
 const Stepper2 = ({ initData, depth = 3, selected, nsxtSelect }: stepperType) => {
   const [steps, setSteps] = useState<string[]>(Array(depth).fill(''));
   const [options, setOptions] = useState<string[][]>(Array(depth).fill([]));
-  console.log('nsxtSelect: ', nsxtSelect);
 
   useEffect(() => {
     let currentOptions = initData;
@@ -27,15 +26,19 @@ const Stepper2 = ({ initData, depth = 3, selected, nsxtSelect }: stepperType) =>
     selected(steps.filter(step => step));
   }, [steps]);
 
+  // NOTE: 여기에서 수동으로 2, 3 의 데이터를 넣는데 뭔가 아쉬움. 
   useEffect(() => {
-    if (steps[0] === '' && options[0].length > 0) {
-      handleChange(0, options[0][0]);
+    if (nsxtSelect) {
+      if (steps[0] === '' && options[0].length > 0) {
+        handleChange(0, options[0][0]);
+      }
     }
   }, [options]);
-
   useEffect(() => {
-    if (steps[1] === '' && options[1].length > 0) {
-      handleChange(1, options[1][0]);
+    if (nsxtSelect) {
+      if (steps[1] === '' && options[1].length > 0) {
+        handleChange(1, options[1][0]);
+      }
     }
   }, [options[1]]);
 

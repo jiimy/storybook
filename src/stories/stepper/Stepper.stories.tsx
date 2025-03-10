@@ -3,7 +3,7 @@ import Stepper from "./Stepper";
 import Stepper2 from "./Stepper2";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { data } from "./mockupData";
+import { data, data1 } from "./mockupData";
 
 const meta: Meta<typeof Stepper2> = {
   title: "Component/Stepper2",
@@ -59,12 +59,13 @@ export const Stepper2Ui: Story = {
     return (
       <>
         처음부터 다 보여주기
+        {/* NOTE: 한개로 하니 레이아웃 계산도 힘듬. */}
         <Stepper2 initData={data} selected={setSendText} nsxtSelect />
 
         <br />
 
         부분적으로 단계에 따라 보여주기
-        <Stepper2 initData={data} selected={setSendText} />
+        <Stepper2 initData={data1} selected={setSendText} />
       </>
     )
   }
