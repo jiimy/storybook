@@ -25,12 +25,17 @@ export const BasicButton: Story = {
   args: {
   },
   render: function Render(args) {
-    // 대륙 - 국가 - 수도 일때 
+    const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+    const handleDataChange = (selectedKeys: string[]) => {
+      // setSelectedValues(selectedKeys);
+      console.log('Selected Values:', selectedKeys);
+    };
     return (
       <>
         {/* initList 로 초기 데이터를 한번에 다 넘겨서 자동으로, 순차적으로 필터링 선택될수도있고 */}
         {/* select는 초기 값의 몇번째 값인지 */}
-        <Stepper initList={data} initSelect={0} groupName="number">
+        <Stepper initList={data} initSelect={0} groupName="number" sendData={handleDataChange}>
           {/* data는 옵션, api도 옵션으로 넣을수있게 하기 */}
           <Stepper.Item />
           <Stepper.Item />

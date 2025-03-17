@@ -13,6 +13,7 @@ type stepperType<T> = {
   className?: string;
   groupName: string; // 연관되는 그룹이름. 알아보는 용도
   initList: T;
+  sendData?: (selectedKeys: string[]) => void; // 선택된 값을 외부로 전달하는 콜백 함수
 } & stepperUiType;
 
 type StepperContextType = {
@@ -51,7 +52,7 @@ const StepperStyle = styled.div<stepperUiType>`
 `;
 
 // Stepper 컴포넌트
-const Stepper = <T extends any>({ children, className, initSelect, theme = 'dropdown', initList, groupName }: stepperType<T>) => {
+const Stepper = <T extends any>({ children, className, initSelect, theme = 'dropdown', initList, groupName, sendData }: stepperType<T>) => {
   const [updateList, setUpdateList] = useState(initList);
 
   // 초기값 설정 함수
@@ -67,6 +68,13 @@ const Stepper = <T extends any>({ children, className, initSelect, theme = 'drop
   };
 
   const [selectedKeys, setSelectedKeys] = useState<string[]>(initializeSelectedKeys(initList, initSelect));
+
+  // selectedKeys가 변경될 때마다 sendData 콜백 호출
+  useEffect(() => {
+    if (sendData) {
+      sendData(selectedKeys);
+    }
+  }, [selectedKeys, sendData]);
 
   // 리스트 업데이트 함수
   const handleUpdateList = (key: string, index: number, arr: unknown[]) => {
