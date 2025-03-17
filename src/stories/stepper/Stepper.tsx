@@ -1,28 +1,25 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
 import s from './stepper.module.scss';
 import StepperItem from './item/StepperItem';
-import styled, { css } from 'styled-components';
-import { group } from 'console';
 
 type stepperUiType = {
-  theme?: 'breadcrumb' | 'dropdown'
-}
+  theme?: 'breadcrumb' | 'dropdown';
+};
+
 type stepperType<T> = {
   children: React.ReactNode;
   initSelect: number; // 초기 선택 값 순서
-  // select: string;
   className?: string;
   groupName: string; // 연관되는 그룹이름. 알아보는 용도
   initList: T;
-} & stepperUiType
-
+} & stepperUiType;
 
 type StepperContextType = {
   updateList: any;
   setUpdateList: (key: string, index: number, arr: unknown[]) => void; // set 함수
   groupName: string;
   initSelect: number;
-  setSelect: React.Dispatch<React.SetStateAction<string>>;
   selectedKeys: string[];
   setSelectedKeys: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -32,29 +29,29 @@ const StepperContext = createContext<StepperContextType | undefined>(undefined);
 
 const StepperStyle = styled.div<stepperUiType>`
   .${s.stepper} {
-    
   }
-  ${props => props.theme === 'dropdown' && css`
-    display: flex;
-    .${s.stepper} {
+  ${props =>
+    props.theme === 'dropdown' &&
+    css`
       display: flex;
-      height: 40px;
-      border-radius: 10px;
-      border: 1px solid black;
-      padding: 0 10px;
-      align-items: center;
-      justify-content: center;
+      .${s.stepper} {
+        display: flex;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid black;
+        padding: 0 10px;
+        align-items: center;
+        justify-content: center;
 
-      &.is_open {
-      border-radius: 10px 10px 0 0 ;
+        &.is_open {
+          border-radius: 10px 10px 0 0;
+        }
       }
-    }
-  `}
-`
+    `}
+`;
 
 // Stepper 컴포넌트
 const Stepper = <T extends any>({ children, className, initSelect, theme = 'dropdown', initList, groupName }: stepperType<T>) => {
-  const [select, setSelect] = useState('11');
   const [updateList, setUpdateList] = useState(initList);
 
   // 초기값 설정 함수
@@ -79,12 +76,8 @@ const Stepper = <T extends any>({ children, className, initSelect, theme = 'drop
     // }));
   };
 
-  const onSelect = (value: string) => {
-    // setSelect(value);
-  };
-
   return (
-    <StepperContext.Provider value={{ updateList, setUpdateList: handleUpdateList, groupName, initSelect, setSelect, selectedKeys, setSelectedKeys }}>
+    <StepperContext.Provider value={{ updateList, setUpdateList: handleUpdateList, groupName, initSelect, selectedKeys, setSelectedKeys }}>
       <StepperStyle className={`${s.stepper_wrapper} ${className}`} theme={theme}>
         {React.Children.map(children, (child, childrenIndex) => {
           return React.cloneElement(child as React.ReactElement<any>, { childrenIndex, data: initList });
@@ -93,7 +86,6 @@ const Stepper = <T extends any>({ children, className, initSelect, theme = 'drop
     </StepperContext.Provider>
   );
 };
-
 
 Stepper.Item = StepperItem;
 
@@ -106,4 +98,4 @@ export const useStepper = (): StepperContextType => {
     throw new Error("Counter Context가 없습니다.");
   }
   return context;
-}
+};

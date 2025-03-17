@@ -5,9 +5,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { data, data1 } from "./mockupData";
 
-const meta: Meta<typeof Stepper2> = {
-  title: "Component/Stepper2",
-  component: Stepper2,
+const meta: Meta<typeof Stepper> = {
+  title: "Component/Stepper",
+  component: Stepper,
   parameters: {
     layout: "centered",
   },
@@ -49,24 +49,24 @@ export const BasicButton: Story = {
 }
 
 
-export const Stepper2Ui: Story = {
-  args: {
-  },
-  render: function Render(args) {
-    const [sendText, setSendText] = useState<string[]>([]);
-    console.log('선택된 텍스트', sendText);
+// export const Stepper2Ui: Story = {
+//   args: {
+//   },
+//   render: function Render(args) {
+//     const [sendText, setSendText] = useState<string[]>([]);
+//     console.log('선택된 텍스트', sendText);
 
-    return (
-      <>
-        처음부터 다 보여주기
-        {/* NOTE: 한개로 하니 레이아웃 계산도 힘듬. */}
-        <Stepper2 initData={data} selected={setSendText} nsxtSelect />
+//     return (
+//       <>
+//         처음부터 다 보여주기
+//         {/* NOTE: 한개로 하니 레이아웃 계산도 힘듬. */}
+//         <Stepper2 initData={data} selected={setSendText} nsxtSelect />
 
-        <br />
+//         <br />
 
-        부분적으로 단계에 따라 보여주기
-        <Stepper2 initData={data1} selected={setSendText} />
-      </>
-    )
-  }
-}
+//         부분적으로 단계에 따라 보여주기
+//         <Stepper2 initData={data1} selected={setSendText} />
+//       </>
+//     )
+//   }
+// }
