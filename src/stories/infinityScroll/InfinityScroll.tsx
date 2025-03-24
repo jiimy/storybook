@@ -5,9 +5,10 @@ type InfinityScrollType = {
     setIndex: (index: any) => void;
     data: any;
     viewCount?: number;
+    type?: 'observer' | 'query'; // observer, 
 }
 
-const InfinityScroll = ({ setIndex, data, viewCount }: InfinityScrollType) => {
+const InfinityScroll = ({ setIndex, data, viewCount, type = 'observer' }: InfinityScrollType) => {
     console.log('받은 데이터', data);
     const loaderRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useState(false);
