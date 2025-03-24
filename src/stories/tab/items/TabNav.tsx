@@ -27,3 +27,4 @@ const TabNav = ({ nav, activeIndex, setActiveIndex, className, isSelectClassName
 };
 
 export default TabNav;
+export type { TabNavProps }

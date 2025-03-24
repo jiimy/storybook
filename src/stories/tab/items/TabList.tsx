@@ -15,3 +15,4 @@ const TabList = ({ children, activeIndex, index = 0, className }: TabListProps) 
 };
 
 export default TabList;
+export type { TabListProps }

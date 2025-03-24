@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Tab from "./Tab";
 import { useState } from "react";
-import TabNav from "./items/TabNav";
+
+type tabProps = {
+  nav: string[];
+  children?: React.ReactNode[];
+};
 
 const meta: Meta<typeof Tab> = {
   title: "Component/Tab",
@@ -10,38 +14,30 @@ const meta: Meta<typeof Tab> = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {
-    // validText: { control: 'text' },
-    // value: { control: 'text' }
-  },
+  argTypes: {},
 };
 
 export default meta;
-type Story = StoryObj<typeof TabNav>;
+type Story = StoryObj<tabProps>;
 
 export const BasicButton: Story = {
   args: {
-    // children: '버튼',
-    // theme: 'primary',
-    // size: 'medium',
-    // onClick: () => alert('버튼 클릭'),
     nav: ['11', '22'],
+    children: ['Content for Tab 1', 'Content for Tab 2']
   },
   render: function Render(args) {
     const [activeIndex, setActiveIndex] = useState(0);
     return (
       <>
-        {/* context api 없이 이게 최선인가.. */}
         <Tab>
-          <Tab.TabNav {...args} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-          <Tab.TabList activeIndex={activeIndex}>
-            111
-          </Tab.TabList>
-          <Tab.TabList activeIndex={activeIndex}>
-            222
-          </Tab.TabList>
+          <Tab.TabNav nav={args?.nav} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+          {args.nav.map((label, index) => (
+            <Tab.TabList key={index} activeIndex={activeIndex} index={index}>
+              {args?.children?.[index] || `Default Content for ${label}`}
+            </Tab.TabList>
+          ))}
         </Tab>
       </>
-    )
+    );
   }
 }
