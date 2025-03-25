@@ -13,6 +13,7 @@ const InfinityScroll = ({ setIndex, data, viewCount, type = 'observer' }: Infini
     const loaderRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [canLoad, setCanLoad] = useState(true);
+    const [items, setItems] = useState<any[]>([]);
 
     useEffect(() => {
         const options = {
@@ -48,14 +49,15 @@ const InfinityScroll = ({ setIndex, data, viewCount, type = 'observer' }: Infini
     useEffect(() => {
         if (data && data.length > 0) {
             setIsLoading(false);
+            setItems((prevItems) => [...prevItems, ...data]);
         }
     }, [data]);
 
     return (
         <div className={s.scroll_wrap}>
-            {data.map((item: any, index: number) => (
+            {items.map((item: any, index: number) => (
                 <div key={index} style={{ padding: '20px', border: '1px solid #ddd', margin: '10px 0' }}>
-                    {item.title}
+                    {index}번 {item.title}
                 </div>
             ))}
             <div ref={loaderRef}>

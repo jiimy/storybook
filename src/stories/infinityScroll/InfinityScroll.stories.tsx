@@ -25,10 +25,11 @@ export const Basic: Story = {
     const [index, setindex] = useState(1);
     const [data, setData] = useState([]);
 
+
     const viewCount = 10;
 
     useEffect(() => {
-      // console.log('dindex', index);
+      console.log('dindex', index);
       axios
         .get(`https://jsonplaceholder.typicode.com/photos?_page=${index}&_limit=${viewCount}`)
         .then((res: any) => {
