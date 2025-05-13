@@ -1,0 +1,4 @@
+.animationTimeline_stretcher__PwAIi{height:600px}
+.container{width:500px;height:300px;overflow-y:scroll;scroll-timeline-name:--squareTimeline;position:relative}.animationTimelineTest{background-color:#ff1493;width:100px;height:100px;margin-top:100px;animation-name:rotateAnimation;animation-duration:1ms;animation-direction:alternate;animation-timeline:--squareTimeline;position:absolute;bottom:0}@keyframes rotateAnimation{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/*# sourceMappingURL=stories-animationTimeline-AnimationTime-stories.c93d64d9.chunk.css.map*/

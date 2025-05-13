@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/stories-infinityScroll-InfinityScroll-stories.a6b1c0f8.chunk.css","mappings":"AAAA","sources":["webpack://snow-white-ui/./src/stories/infinityScroll/infinityscroll.module.scss"],"sourcesContent":[".scroll_wrap {\r\n    overflow: auto;\r\n    max-height: 300px;\r\n    }\r\n"],"names":[],"sourceRoot":""}
