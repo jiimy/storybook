@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import s from './snackbar.module.scss';
 
@@ -77,7 +77,7 @@ const Snackbar = ({
   className
 }: snackbarItemProps) => {
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (timer !== 0) {
       const showTimer = setTimeout(() => {
         onClose()

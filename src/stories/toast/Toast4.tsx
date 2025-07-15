@@ -64,7 +64,7 @@ export const ToastProvider4 = ({ children }: { children: ReactNode }) => {
       type,
     };
     setMessages((prevMessages) => [...prevMessages, newMessage]);
-    alert(`addMessage: ${message}`);
+    // alert(`addMessage: ${message}`);
   }, []);
 
   const closeMessage = useCallback((id: number) => {
@@ -78,7 +78,7 @@ export const ToastProvider4 = ({ children }: { children: ReactNode }) => {
 
   return (
     <ToastContext.Provider value={{ getMessage }}>
-      {/* <ToastContainer messages={messages} closeMessage={closeMessage} /> */}
+      <ToastContainer messages={messages} closeMessage={closeMessage} />
       {children}
     </ToastContext.Provider>
   );

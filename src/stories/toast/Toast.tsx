@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import s from './toast.module.scss';
 import { HideProgressBarStyle, ToastWrapperStyle } from './ToastStyle';
@@ -80,6 +80,7 @@ const Toast = ({
 }: toastProps) => {
   const [visible, setVisible] = useState(true);
   const [clickcount, setClickCount] = useState([]);
+  const toastRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     console.log('여는 이벤트 발생');
@@ -95,7 +96,13 @@ const Toast = ({
   }, [timer, onClose]);
 
   return (
-    <ToastStyle {...props} startDirection={startDirection} timer={timer} className={`${className} ${s.toast}`}>
+    <ToastStyle
+      {...props}
+      ref={toastRef}
+      startDirection={startDirection}
+      timer={timer}
+      className={`${className} ${s.toast}`}
+    >
       {children}
       {onClose && <div onClick={() => { setVisible(false); onClose(); }}>닫기</div>}
       {!hideProgressBar && <HideProgressBarStyle timer={timer} state={state} className={s.progressbar} />}

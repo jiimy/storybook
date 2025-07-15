@@ -5,6 +5,7 @@ import Toast, { ToastWrapper } from "./Toast";
 import { Toast2 } from "./Toast2";
 import { Toast3, ToastProvider } from "./Toast3";
 import { Toast4, ToastProvider4 } from "./Toast4";
+import { useToast } from "./NewToastContext";
 
 const meta: Meta<typeof Toast> = {
   title: "Component/Toast",
@@ -20,29 +21,29 @@ export default meta;
 type Story = StoryObj<typeof Toast>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Basic: Story = {
-  args: {
-    startDirection: 'top-center'
-  },
-  render: function Render(args) {
-    const [isOpen, setIsOpen] = useState(false);
+// export const Basic: Story = {
+//   args: {
+//     startDirection: 'top-center'
+//   },
+//   render: function Render(args) {
+//     const [isOpen, setIsOpen] = useState(false);
 
-    return (
-      <>
-        {/* <Button onClick={() => setOn(true)}>토스트 오픈</Button> */}
-        <Button onClick={() => setIsOpen(true)}>토스트 오픈</Button>
-        <ToastWrapper startDirection={args.startDirection}>
-          {
-            isOpen &&
-            <Toast state={args.state} onClose={() => setIsOpen(false)}>
-              토스트 내용 1
-            </Toast>
-          }
-        </ToastWrapper>
-      </>
-    )
-  }
-}
+//     return (
+//       <>
+//         {/* <Button onClick={() => setOn(true)}>토스트 오픈</Button> */}
+//         <Button onClick={() => setIsOpen(true)}>토스트 오픈</Button>
+//         <ToastWrapper startDirection={args.startDirection}>
+//           {
+//             isOpen &&
+//             <Toast state={args.state} onClose={() => setIsOpen(false)}>
+//               토스트 내용 1
+//             </Toast>
+//           }
+//         </ToastWrapper>
+//       </>
+//     )
+//   }
+// }
 
 // export const ToastSecond: Story = {
 //   render: function Render(args) {
@@ -95,12 +96,26 @@ export const Basic: Story = {
 //   render: function Redner(args) {
 //     return (
 //       <>
-//         <ToastProvider4>
-//           <Button
-//             onClick={() => Toast4.success('이름')}
-//           >버튼</Button>
-//         </ToastProvider4>
+//         <Button
+//           onClick={() => Toast4.success('이름')}
+//         >버튼</Button>
 //       </>
 //     )
 //   }
 // }
+
+export const ToastFourth: Story = {
+  render: function Redner(args) {
+    const { addToast } = useToast();
+    return (
+      <>
+        <button
+          onClick={() => addToast('기본 토스트 메시지입니다.', 3000)}
+          className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+        >
+          기본 토스트
+        </button>
+      </>
+    )
+  }
+}
