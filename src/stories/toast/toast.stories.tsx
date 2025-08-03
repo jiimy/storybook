@@ -6,6 +6,7 @@ import { Toast2 } from "./Toast2";
 import { Toast3, ToastProvider } from "./Toast3";
 import { Toast4, ToastProvider4 } from "./Toast4";
 import { useToast } from "./NewToastContext";
+import { ToastContainer } from "./NewToast";
 
 const meta: Meta<typeof Toast> = {
   title: "Component/Toast",
