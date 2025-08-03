@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { useRef, useEffect, useState } from 'react';
 import s from '../tab.module.scss';
 
 type TabNavProps = {
@@ -10,9 +10,27 @@ type TabNavProps = {
   isSelectClassName?: string;
 };
 
+
+
+type BarStyle = {
+  left: number;
+  width: number;
+};
+
+
+function useTabBar(navLength: number, activeIndex: number) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [barStyle, setBarStyle] = useState<BarStyle>({ left: 0, width: 0 });
+}
+
+
 const TabNav = ({ nav, activeIndex, setActiveIndex, className, isSelectClassName }: TabNavProps) => {
+  // const { containerRef, barStyle } = useTabBar(nav.length, activeIndex);
+
   return (
-    <div className={classNames([s.tab_nav], className)}>
+    <div className={classNames([s.tab_nav], className)}
+    // ref={containerRef}
+    >
       {nav.map((item, index) => (
         <button
           key={index}
@@ -22,6 +40,7 @@ const TabNav = ({ nav, activeIndex, setActiveIndex, className, isSelectClassName
           {item}
         </button>
       ))}
+      {/* <div className={s.tab_nav_bar} style={barStyle} /> */}
     </div>
   );
 };

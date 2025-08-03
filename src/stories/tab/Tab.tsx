@@ -13,6 +13,7 @@ const Tab = ({ children, defaultIndex = 0, className }: TabProps) => {
   const [activeIndex, setActiveIndex] = useState(defaultIndex);
 
   let tabIndex = 0;
+
   const childrenWithProps = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       if (child.type === Tab.TabNav) {
